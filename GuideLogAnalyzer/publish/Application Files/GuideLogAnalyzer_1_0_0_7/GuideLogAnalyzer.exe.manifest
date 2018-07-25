@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="GuideLogAnalyzer.exe" version="1.0.0.7" publicKeyToken="5187c539ab8fc860" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="airydisk.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="GuideLogAnalyzer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="GuideLogAnalyzer.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GuideLogAnalyzer.exe" size="300528">
+      <assemblyIdentity name="GuideLogAnalyzer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>qneDy6wP8w6XxFxZZhpFvOqqt5ix/XFLRGkHMJpei6k=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="airydisk.ico" size="125662">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jrzpYB5iR3qPUr/eQWigrS0Tko5KGZGJf/Vf7OdIPco=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="GuideLogAnalyzer.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>rl5/qDc7Jz+tB+BIbOv9iMGPlRe6YJwrjmU09dnlPcs=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=KILOLANI\Rick McAlister" issuerKeyHash="1412bf59cb78ec232efc1f88873fdcebacd288ac" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>vNAjMUuda/S5JBT671jfDcLMfKlK6W2OglWNSkVhGiE=</DigestValue></Reference></SignedInfo><SignatureValue>KD4kSTDrqBWXThFG7fQCaJfREc5a2zqKvkSi738uSoFcAPwXF/xbtS2DKhrYw8M3TRartHDLnCJUH/dHWIdkRQwIJu5gUeFCAIAE09cSM1/7nVquv8E0UAX3iaPtWpECIt6DCQ3NKxRJfalJOosaUi9teDOqNNZ4I0JuvrMmQZg=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>2+s/0JSdC8AHSLDvmQI8V6um+6/Cju4O6eJI5kg3pjEee3TGI8EHNanj9Bxavql0nnlPM4kUUAnyMG3gN993eznpFSW5X+7JloFIpC/43CSqLEyquMDrXO6cwUF3sUyjey7toUOGfbT500gXFAPX2MSGVfFte3rTcVpX883XD20=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="211a61454a8d55828e6de94aa97cccc20ddf58effa1424b9f46b9d4b3123d0bc" Description="" Url=""><as:assemblyIdentity name="GuideLogAnalyzer.exe" version="1.0.0.7" publicKeyToken="5187c539ab8fc860" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=KILOLANI\Rick McAlister</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>s1XvHiOUpctwo/baSD8C0fvQEkB/fqUnEd1Z1jjS1u4=</DigestValue></Reference></SignedInfo><SignatureValue>a6anHq4mBOn0khxolGZPUoS8nqYuY9xEook/f8wm61mMZZLGqAcmC6sR1mX6bSmGJ8J7rR/7edrmUS1D1xFufLGulA/dj/3F3hSAFICVXv4EjQUUSThwmBaJQpgEIvJP1CTY6iRDGTOgwIljP3haF+dUvmUomI5F1jO2/TewRnQ=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>2+s/0JSdC8AHSLDvmQI8V6um+6/Cju4O6eJI5kg3pjEee3TGI8EHNanj9Bxavql0nnlPM4kUUAnyMG3gN993eznpFSW5X+7JloFIpC/43CSqLEyquMDrXO6cwUF3sUyjey7toUOGfbT500gXFAPX2MSGVfFte3rTcVpX883XD20=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB9TCCAV6gAwIBAgIQY2aDMYEitplL1H7kRuSQuzANBgkqhkiG9w0BAQsFADA5MTcwNQYDVQQDHi4ASwBJAEwATwBMAEEATgBJAFwAUgBpAGMAawAgAE0AYwBBAGwAaQBzAHQAZQByMB4XDTE4MDEyMzAwMDYyNFoXDTE5MDEyMzA2MDYyNFowOTE3MDUGA1UEAx4uAEsASQBMAE8ATABBAE4ASQBcAFIAaQBjAGsAIABNAGMAQQBsAGkAcwB0AGUAcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA2+s/0JSdC8AHSLDvmQI8V6um+6/Cju4O6eJI5kg3pjEee3TGI8EHNanj9Bxavql0nnlPM4kUUAnyMG3gN993eznpFSW5X+7JloFIpC/43CSqLEyquMDrXO6cwUF3sUyjey7toUOGfbT500gXFAPX2MSGVfFte3rTcVpX883XD20CAwEAATANBgkqhkiG9w0BAQsFAAOBgQASztRnnhOUWOZzJOSb4a396w+CsJBKsBHePXRyc5AR62XR/ehh76NVkjYbuwlgsKZIROTibMel7DRRRGF11i1eZ4rakcOF1fDSXW1W3iy8J8BPNfupyzPbUvZ7Jq4rbn4fBOk7cWXpxmf65kOY59qENZteByDQgz54cLLArzoncg==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
