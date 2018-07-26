@@ -22,12 +22,12 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://github.com/rrskybox/GuideLogAnalyzer/blob/master/GuideLogAnalyzer/publish/</InstallUrl>
-    <UpdateUrl>https://github.com/rrskybox/GuideLogAnalyzer/blob/master/GuideLogAnalyzer/publish/</UpdateUrl>
+    <InstallUrl>https://github.com/rrskybox/GuideLogAnalyzer/tree/master/GuideLogAnalyzer/publish/</InstallUrl>
+    <UpdateUrl>https://github.com/rrskybox/GuideLogAnalyzer/tree/master/GuideLogAnalyzer/publish/</UpdateUrl>
     <ProductName>Guide Log Analyzer</ProductName>
     <PublisherName>TSXToolkit</PublisherName>
     <SuiteName>TSXToolkit</SuiteName>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
