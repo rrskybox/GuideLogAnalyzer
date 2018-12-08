@@ -420,6 +420,12 @@ namespace GuideLogAnalyzer
         {
             e.Graphics.DrawImage(memoryImage, e.PageBounds);
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            Form fHelp = new FormHelp();
+            fHelp.Show();
+        }
     }
 }
 

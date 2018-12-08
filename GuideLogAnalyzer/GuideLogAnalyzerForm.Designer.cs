@@ -112,7 +112,6 @@
             this.CurrentPABox = new System.Windows.Forms.TextBox();
             this.AboutButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
-            this.HelpButton = new System.Windows.Forms.Button();
             this.label33 = new System.Windows.Forms.Label();
             this.BinningBox = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
@@ -123,6 +122,7 @@
             this.CalibrationGraphLabel = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
+            this.HelpButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
@@ -905,15 +905,6 @@
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
-            // HelpButton
-            // 
-            this.HelpButton.Location = new System.Drawing.Point(1171, 10);
-            this.HelpButton.Name = "HelpButton";
-            this.HelpButton.Size = new System.Drawing.Size(75, 23);
-            this.HelpButton.TabIndex = 43;
-            this.HelpButton.Text = "Help";
-            this.HelpButton.UseVisualStyleBackColor = true;
-            // 
             // label33
             // 
             this.label33.AutoSize = true;
@@ -1021,12 +1012,23 @@
             this.label36.Text = "90";
             this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // HelpButton
+            // 
+            this.HelpButton.Location = new System.Drawing.Point(1171, 9);
+            this.HelpButton.Name = "HelpButton";
+            this.HelpButton.Size = new System.Drawing.Size(75, 23);
+            this.HelpButton.TabIndex = 54;
+            this.HelpButton.Text = "Help";
+            this.HelpButton.UseVisualStyleBackColor = true;
+            this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
+            // 
             // GuideLogAnalyzerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(1258, 814);
+            this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.label36);
             this.Controls.Add(this.label35);
             this.Controls.Add(this.CalibrationGraphLabel);
@@ -1036,7 +1038,6 @@
             this.Controls.Add(this.BinningBox);
             this.Controls.Add(this.label34);
             this.Controls.Add(this.ExposureBox);
-            this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.AboutButton);
             this.Controls.Add(this.label32);
@@ -1168,7 +1169,6 @@
         private System.Windows.Forms.TextBox CurrentPABox;
         private System.Windows.Forms.Button AboutButton;
         private System.Windows.Forms.Button CloseButton;
-        private System.Windows.Forms.Button HelpButton;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.TextBox BinningBox;
         private System.Windows.Forms.Label label34;
@@ -1179,6 +1179,7 @@
         private System.Windows.Forms.Label CalibrationGraphLabel;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Button HelpButton;
     }
 }
 
