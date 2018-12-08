@@ -43,6 +43,11 @@ namespace GuideLogAnalyzer
 
             DialogResult GuideLogPathResult = GuideLogFilenameDialog.ShowDialog();
             GuideLogFilePath.Text = GuideLogFilenameDialog.FileName;
+            if (!GuideLogFilePath.Text.Contains(".log"))
+            { 
+                MessageBox.Show("File not a log file");
+                return;
+            }
 
             PrepGraphs();
 
