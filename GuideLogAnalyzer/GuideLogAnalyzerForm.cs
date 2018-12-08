@@ -10,16 +10,10 @@
 ///         
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Numerics;
+using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace GuideLogAnalyzer
@@ -35,6 +29,8 @@ namespace GuideLogAnalyzer
         public Series mGraphT;
         public Series mGraphX;
         public Series mGraphY;
+        public Series cGraphPX;
+        public Series cGraphPY;
 
         public GuideLogAnalyzerForm()
         {
@@ -197,6 +193,49 @@ namespace GuideLogAnalyzer
                     mGraphY.Color = Color.Green;
                 }
             }
+            //Calibration Plot
+            double xpAngle = guideLog.GetMountVelocityVector(LogReader.Calibration.XPlus, LogReader.Vector.Angle);
+            double xmAngle = guideLog.GetMountVelocityVector(LogReader.Calibration.XMinus, LogReader.Vector.Angle);
+            double ypAngle = guideLog.GetMountVelocityVector(LogReader.Calibration.YPlus, LogReader.Vector.Angle);
+            double ymAngle = guideLog.GetMountVelocityVector(LogReader.Calibration.YMinus, LogReader.Vector.Angle);
+            double xpSpeed = Math.Abs(guideLog.GetMountVelocityVector(LogReader.Calibration.XPlus, LogReader.Vector.XSpeed));
+            double xmSpeed = Math.Abs(guideLog.GetMountVelocityVector(LogReader.Calibration.XMinus, LogReader.Vector.XSpeed));
+            double ypSpeed = Math.Abs(guideLog.GetMountVelocityVector(LogReader.Calibration.YPlus, LogReader.Vector.YSpeed));
+            double ymSpeed = Math.Abs(guideLog.GetMountVelocityVector(LogReader.Calibration.YMinus, LogReader.Vector.YSpeed));
+
+            cGraphPX.Points.Add(0, 0);
+            cGraphPX.Points.AddXY(xpAngle, xpSpeed);
+            cGraphPX.Points[cGraphPX.Points.Count - 1].MarkerStyle = MarkerStyle.Cross;
+            cGraphPX.Points.Add(0, 0);
+            cGraphPX.Points.AddXY(xmAngle, xmSpeed);
+            cGraphPX.Points[cGraphPX.Points.Count - 1].MarkerStyle = MarkerStyle.Circle ;
+            cGraphPY.Points.Add(0, 0);
+            cGraphPY.Points.AddXY(ypAngle, ypSpeed);
+            cGraphPY.Points[cGraphPY.Points.Count - 1].MarkerStyle = MarkerStyle.Cross;
+            cGraphPY.Points.Add(0, 0);
+            cGraphPY.Points.AddXY(ymAngle, ymSpeed);
+            cGraphPY.Points[cGraphPY.Points.Count - 1].MarkerStyle = MarkerStyle.Circle;
+
+            foreach (System.Windows.Forms.DataVisualization.Charting.DataPoint point in cGraphPX.Points)
+            {
+                if ((double)point.YValues.GetValue(0) == 0)
+                {
+                    point.IsValueShownAsLabel = false;
+                    point.MarkerStyle = MarkerStyle.None;
+                }
+                else point.IsValueShownAsLabel = true;
+            }
+
+            foreach (System.Windows.Forms.DataVisualization.Charting.DataPoint point in cGraphPY.Points)
+            {
+                if ((double)point.YValues.GetValue(0) == 0)
+                {
+                    point.IsValueShownAsLabel = false;
+                    point.MarkerStyle = MarkerStyle.None;
+                }
+                else point.IsValueShownAsLabel = true;
+            }
+
             Show();
 
             //
@@ -303,6 +342,39 @@ namespace GuideLogAnalyzer
             mGraphY.ChartType = SeriesChartType.FastLine;
             mGraphY.MarkerStyle = MarkerStyle.Circle;
 
+            chart4.Series.Clear();
+            cGraphPX = new Series("CalibrationPX");
+            chart4.Series.Add(cGraphPX);
+            cGraphPX.ChartType = SeriesChartType.Polar;
+            cGraphPX.XValueType = ChartValueType.Double;
+            cGraphPX.YValueType = ChartValueType.Double;
+            cGraphPX.MarkerStyle = MarkerStyle.Circle;
+            cGraphPX.MarkerColor = Color.Blue;
+            cGraphPX.SetCustomProperty("PolarDrawingStyle", "Line");
+
+            cGraphPY = new Series("CalibrationPY");
+            chart4.Series.Add(cGraphPY);
+            cGraphPY.ChartType = SeriesChartType.Polar;
+            cGraphPY.XValueType = ChartValueType.Double;
+            cGraphPY.YValueType = ChartValueType.Double;
+            cGraphPY.MarkerStyle = MarkerStyle.Circle;
+            cGraphPY.MarkerColor = Color.Green;
+            cGraphPY.SetCustomProperty("PolarDrawingStyle", "Line");
+
+            ChartArea cArea = chart4.ChartAreas.FindByName("CalibrationChart");
+            cArea.AxisX.LabelStyle.Enabled = false;
+            cArea.AxisX.Interval = 90;
+            cArea.AxisY.Enabled = AxisEnabled.False;
+
+            //cGraphP.IsValueShownAsLabel = true;
+            cGraphPX.LabelForeColor = Color.Blue;
+            cGraphPX.LabelFormat = "0.00";
+            cGraphPX.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Yes;
+            cGraphPY.LabelForeColor = Color.Green;
+            cGraphPY.LabelFormat = "0.00";
+            cGraphPY.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Yes;
+            //cGraph.SmartLabelStyle.MovingDirection = LabelAlignmentStyles.Right;
+
             return;
         }
 
@@ -341,7 +413,7 @@ namespace GuideLogAnalyzer
 
         private void printDocument1_PrintPage(System.Object sender, PrintPageEventArgs e)
         {
-            e.Graphics.DrawImage(memoryImage, e.PageBounds) ;
+            e.Graphics.DrawImage(memoryImage, e.PageBounds);
         }
     }
 }

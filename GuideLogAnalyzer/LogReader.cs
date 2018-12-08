@@ -165,7 +165,7 @@ namespace GuideLogAnalyzer
             return LogArray.GetLength(0);
         }
 
-        public double GetVelocityVector(Calibration wVector, Vector wComponent)
+        public double GetMountVelocityVector(Calibration wVector, Vector wComponent)
         //returns the velocity vector components: wVector::: 0 = X+, 1 = X-, 2 = Y+, 3 = Y-
         //  wComponent::: 0 = Speed, 1 = X component, 2 = Y component, 3 = Angle
         {
