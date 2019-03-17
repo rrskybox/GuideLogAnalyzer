@@ -109,7 +109,45 @@ namespace GuideLogAnalyzer
 
             return (RMS);
         }
-        
+
+        public static double[] Wander(double[] errorXVal, double[] errorYVal, double[] errorTVal)
+        {
+            //Rroot mean sum of the squares of all error points, relative to mean value
+            double dCount = errorXVal.Length;
+            double sumXsquared = 0;
+            double sumYsquared = 0;
+            double sumXYsquared = 0;
+            double meanX = 0;
+            double meanY = 0;
+            double meanT = 0;
+
+            //compute mean for error points
+            for (int i = 0; i < dCount; i++)
+            {
+                meanX += errorXVal[i];
+                meanY += errorYVal[i];
+                meanT += errorTVal[i];
+            }
+            meanX = meanX / dCount;
+            meanY = meanY / dCount;
+            meanT = meanT / dCount;
+
+            double[] WMS = new double[3];
+
+            for (int i = 0; i < dCount; i++)
+            {
+                sumXsquared += Math.Pow(errorXVal[i] - meanX, 2);
+                sumYsquared += Math.Pow(errorYVal[i] - meanY, 2);
+                sumXYsquared += Math.Pow(errorTVal[i] - meanT, 2);
+            }
+            //Double result for full range of wander
+            WMS[0] = 2 * Math.Sqrt(sumXsquared / dCount);
+            WMS[1] = 2 * Math.Sqrt(sumYsquared / dCount);
+            WMS[2] = 2 * Math.Sqrt(sumXYsquared / dCount);
+
+            return (WMS);
+        }
+
         public static double[] FrequencyMedian(double[,] errorVals)
         {
             //Determines the midpoint frequency for X,Y and total points

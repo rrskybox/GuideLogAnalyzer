@@ -87,6 +87,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.ErrorRMSBox = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.WanderBox = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.CorrectionXandYPercentBox = new System.Windows.Forms.TextBox();
@@ -661,6 +663,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.WanderBox);
+            this.groupBox3.Controls.Add(this.label37);
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.CorrectionEachPercentBox);
             this.groupBox3.Controls.Add(this.label13);
@@ -676,12 +680,30 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "% Corrected (Mount)";
             // 
+            // WanderBox
+            // 
+            this.WanderBox.Location = new System.Drawing.Point(141, 71);
+            this.WanderBox.Name = "WanderBox";
+            this.WanderBox.Size = new System.Drawing.Size(79, 20);
+            this.WanderBox.TabIndex = 31;
+            this.WanderBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.ForeColor = System.Drawing.SystemColors.Control;
+            this.label37.Location = new System.Drawing.Point(7, 74);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(137, 13);
+            this.label37.TabIndex = 30;
+            this.label37.Text = "Wander X/Y/Total (arcsec)";
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.Control;
-            this.label15.Location = new System.Drawing.Point(29, 106);
+            this.label15.Location = new System.Drawing.Point(34, 102);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(169, 26);
             this.label15.TabIndex = 24;
@@ -691,15 +713,15 @@
             // 
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.SystemColors.Control;
-            this.label13.Location = new System.Drawing.Point(6, 74);
+            this.label13.Location = new System.Drawing.Point(162, 48);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(38, 13);
+            this.label13.Size = new System.Drawing.Size(19, 13);
             this.label13.TabIndex = 23;
-            this.label13.Text = "Total *";
+            this.label13.Text = "/ *";
             // 
             // CorrectionXandYPercentBox
             // 
-            this.CorrectionXandYPercentBox.Location = new System.Drawing.Point(81, 71);
+            this.CorrectionXandYPercentBox.Location = new System.Drawing.Point(182, 45);
             this.CorrectionXandYPercentBox.Name = "CorrectionXandYPercentBox";
             this.CorrectionXandYPercentBox.Size = new System.Drawing.Size(38, 20);
             this.CorrectionXandYPercentBox.TabIndex = 22;
@@ -711,9 +733,9 @@
             this.label6.ForeColor = System.Drawing.SystemColors.Control;
             this.label6.Location = new System.Drawing.Point(7, 48);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 13);
+            this.label6.Size = new System.Drawing.Size(67, 13);
             this.label6.TabIndex = 21;
-            this.label6.Text = "X / Y";
+            this.label6.Text = "X / Y / Total";
             // 
             // CorrectionXorYPercentBox
             // 
@@ -1073,7 +1095,7 @@
             this.Controls.Add(this.GuideLogFilePath);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GuideLogAnalyzerForm";
-            this.Text = "Guide Log Analyzer V1.1";
+            this.Text = "Guide Log Analyzer V1.2";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
@@ -1180,6 +1202,8 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Button HelpButton;
+        private System.Windows.Forms.TextBox WanderBox;
+        private System.Windows.Forms.Label label37;
     }
 }
 

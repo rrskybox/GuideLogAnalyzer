@@ -3,11 +3,12 @@
 /// Rick McAlister, 2018
 /// 
 /// V1.0 -  Initial release (02-15-18)
-/// V1.01 - Added a test while loading lines of data for incompatibilites
+/// V1.1 - Added a test while loading lines of data for incompatibilites
 ///         eg changing guider controls during a run will cause a new set of control
 ///         entries (min,max,aggressiveness) to be logged.  This will really confuse the
 ///         conversion routine. So, it burps an error and stops adding data at that point now.
-///         
+/// V1.2  - Added a Wander error estimate:  2 x RMS difference between the error average and absolute position
+/// 
 
 using System;
 using System.Drawing;
@@ -277,6 +278,10 @@ namespace GuideLogAnalyzer
 
             double[] RMSStats = Analysis.RMSError(errorValsXdbl, errorValsYdbl, errorValsTdbl);
             ErrorRMSBox.Text = RMSStats[0].ToString("0.00") + " / " + RMSStats[1].ToString("0.00") + " / " + RMSStats[2].ToString("0.00");
+            Show();
+
+            double[] WanderStats = Analysis.Wander(errorValsXdbl, errorValsYdbl, errorValsTdbl);
+            WanderBox.Text = WanderStats[0].ToString("0.0") + " / " + WanderStats[1].ToString("0.0") + " / " + WanderStats[2].ToString("0.0");
             Show();
 
             double[] FreqMedStats = Analysis.FrequencyMedian(errorFreq);
