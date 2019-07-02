@@ -79,7 +79,9 @@
             this.SwitchBackPercentBox = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.DriftBox = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             this.FrequencyBalanceBox = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.OvershootPercentBox = new System.Windows.Forms.TextBox();
@@ -87,8 +89,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.ErrorRMSBox = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.WanderBox = new System.Windows.Forms.TextBox();
-            this.label37 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.CorrectionXandYPercentBox = new System.Windows.Forms.TextBox();
@@ -125,6 +125,8 @@
             this.label35 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.HelpButton = new System.Windows.Forms.Button();
+            this.label38 = new System.Windows.Forms.Label();
+            this.PEIndexTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
@@ -375,9 +377,9 @@
             this.MountControlGroup.Controls.Add(this.label4);
             this.MountControlGroup.Controls.Add(this.label5);
             this.MountControlGroup.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.MountControlGroup.Location = new System.Drawing.Point(16, 701);
+            this.MountControlGroup.Location = new System.Drawing.Point(16, 727);
             this.MountControlGroup.Name = "MountControlGroup";
-            this.MountControlGroup.Size = new System.Drawing.Size(309, 104);
+            this.MountControlGroup.Size = new System.Drawing.Size(309, 103);
             this.MountControlGroup.TabIndex = 20;
             this.MountControlGroup.TabStop = false;
             this.MountControlGroup.Text = "Control (Mount)";
@@ -397,7 +399,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox1.Location = new System.Drawing.Point(331, 645);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(169, 160);
+            this.groupBox1.Size = new System.Drawing.Size(169, 185);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AO Control";
@@ -500,7 +502,7 @@
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox2.Location = new System.Drawing.Point(506, 645);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(740, 160);
+            this.groupBox2.Size = new System.Drawing.Size(740, 185);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Analysis";
@@ -516,7 +518,7 @@
             this.groupBox5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox5.Location = new System.Drawing.Point(492, 11);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(239, 139);
+            this.groupBox5.Size = new System.Drawing.Size(239, 168);
             this.groupBox5.TabIndex = 30;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Correction Statistics (Mount)";
@@ -526,7 +528,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.SystemColors.Control;
-            this.label23.Location = new System.Drawing.Point(36, 106);
+            this.label23.Location = new System.Drawing.Point(36, 129);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(173, 26);
             this.label23.TabIndex = 28;
@@ -555,7 +557,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.SystemColors.Control;
-            this.label21.Location = new System.Drawing.Point(36, 74);
+            this.label21.Location = new System.Drawing.Point(36, 97);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(177, 26);
             this.label21.TabIndex = 25;
@@ -581,7 +583,9 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.DriftBox);
             this.groupBox4.Controls.Add(this.label20);
+            this.groupBox4.Controls.Add(this.label37);
             this.groupBox4.Controls.Add(this.FrequencyBalanceBox);
             this.groupBox4.Controls.Add(this.label19);
             this.groupBox4.Controls.Add(this.OvershootPercentBox);
@@ -591,21 +595,39 @@
             this.groupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox4.Location = new System.Drawing.Point(6, 11);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(248, 139);
+            this.groupBox4.Size = new System.Drawing.Size(248, 168);
             this.groupBox4.TabIndex = 29;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Error Statistics";
+            // 
+            // DriftBox
+            // 
+            this.DriftBox.Location = new System.Drawing.Point(135, 97);
+            this.DriftBox.Name = "DriftBox";
+            this.DriftBox.Size = new System.Drawing.Size(107, 20);
+            this.DriftBox.TabIndex = 31;
+            this.DriftBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.SystemColors.Control;
-            this.label20.Location = new System.Drawing.Point(38, 106);
+            this.label20.Location = new System.Drawing.Point(41, 129);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(169, 26);
             this.label20.TabIndex = 25;
             this.label20.Text = "* Values greater than 50% suggest\r\nthat Max Move may be too high.";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.ForeColor = System.Drawing.SystemColors.Control;
+            this.label37.Location = new System.Drawing.Point(6, 100);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(98, 13);
+            this.label37.TabIndex = 30;
+            this.label37.Text = "Wobble X/Y/Total ";
             // 
             // FrequencyBalanceBox
             // 
@@ -663,8 +685,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.WanderBox);
-            this.groupBox3.Controls.Add(this.label37);
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.CorrectionEachPercentBox);
             this.groupBox3.Controls.Add(this.label13);
@@ -675,35 +695,17 @@
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox3.Location = new System.Drawing.Point(260, 11);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(226, 139);
+            this.groupBox3.Size = new System.Drawing.Size(226, 168);
             this.groupBox3.TabIndex = 24;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "% Corrected (Mount)";
-            // 
-            // WanderBox
-            // 
-            this.WanderBox.Location = new System.Drawing.Point(141, 71);
-            this.WanderBox.Name = "WanderBox";
-            this.WanderBox.Size = new System.Drawing.Size(79, 20);
-            this.WanderBox.TabIndex = 31;
-            this.WanderBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.ForeColor = System.Drawing.SystemColors.Control;
-            this.label37.Location = new System.Drawing.Point(7, 74);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(137, 13);
-            this.label37.TabIndex = 30;
-            this.label37.Text = "Wander X/Y/Total (arcsec)";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.Control;
-            this.label15.Location = new System.Drawing.Point(34, 102);
+            this.label15.Location = new System.Drawing.Point(32, 129);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(169, 26);
             this.label15.TabIndex = 24;
@@ -1044,12 +1046,32 @@
             this.HelpButton.UseVisualStyleBackColor = true;
             this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
             // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.ForeColor = System.Drawing.SystemColors.Control;
+            this.label38.Location = new System.Drawing.Point(14, 701);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(68, 13);
+            this.label38.TabIndex = 56;
+            this.label38.Text = "PE Indexed?";
+            // 
+            // PEIndexTextBox
+            // 
+            this.PEIndexTextBox.Location = new System.Drawing.Point(179, 698);
+            this.PEIndexTextBox.Name = "PEIndexTextBox";
+            this.PEIndexTextBox.Size = new System.Drawing.Size(45, 20);
+            this.PEIndexTextBox.TabIndex = 55;
+            this.PEIndexTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // GuideLogAnalyzerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(1258, 814);
+            this.ClientSize = new System.Drawing.Size(1258, 842);
+            this.Controls.Add(this.label38);
+            this.Controls.Add(this.PEIndexTextBox);
             this.Controls.Add(this.HelpButton);
             this.Controls.Add(this.label36);
             this.Controls.Add(this.label35);
@@ -1095,7 +1117,7 @@
             this.Controls.Add(this.GuideLogFilePath);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GuideLogAnalyzerForm";
-            this.Text = "Guide Log Analyzer V1.2";
+            this.Text = "Guide Log Analyzer V1.3";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
@@ -1202,8 +1224,10 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Button HelpButton;
-        private System.Windows.Forms.TextBox WanderBox;
+        private System.Windows.Forms.TextBox DriftBox;
         private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox PEIndexTextBox;
     }
 }
 

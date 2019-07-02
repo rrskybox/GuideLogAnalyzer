@@ -8,7 +8,9 @@
 ///         entries (min,max,aggressiveness) to be logged.  This will really confuse the
 ///         conversion routine. So, it burps an error and stops adding data at that point now.
 /// V1.2  - Added a Wander error estimate:  2 x RMS difference between the error average and absolute position
-/// 
+/// V1.3  - Removed Wander; added Wobble indicator.
+/// V1.4  - Added check for PE Index (worm) data presence
+///
 
 using System;
 using System.Drawing;
@@ -118,6 +120,9 @@ namespace GuideLogAnalyzer
             Double[] correctionXMinus = new double[vLen];
             Double[] correctionYPlus = new double[vLen];
             Double[] correctionYMinus = new double[vLen];
+            double[] wormIndexRA = new double[vLen];
+            double[] wormIndexDec = new double[vLen];
+
 
             double FFTTimeIncrement = 0; //time per sample in sec
             double nowTime = 0;
@@ -135,6 +140,8 @@ namespace GuideLogAnalyzer
                 correctionXMinus[i] = guideLog.GetLogValue(i, LogReader.LogVal.XMinusRelay);
                 correctionYPlus[i] = guideLog.GetLogValue(i, LogReader.LogVal.XPlusRelay);
                 correctionYMinus[i] = guideLog.GetLogValue(i, LogReader.LogVal.YMinusRelay);
+                wormIndexRA[i] = guideLog.GetLogValue(i, LogReader.LogVal.PECIndexRA);
+                wormIndexDec[i] = guideLog.GetLogValue(i, LogReader.LogVal.PECIndexDec);
 
                 nowTime = guideLog.GetLogValue(i, LogReader.LogVal.ElapsedSecs);
                 if (i < (vLen - 1))
@@ -149,6 +156,11 @@ namespace GuideLogAnalyzer
                 tGraphY.Color = Color.Green;
             }
             Show();
+            //Determine if wormIndex data is present and post results
+            double pesum = 0;
+            for (int i=0;i<vLen;i++) { pesum += (wormIndexDec[i] + wormIndexRA[i]); }
+            if (pesum == 0) PEIndexTextBox.Text = "No";
+            else PEIndexTextBox.Text = "Yes";
 
             //frequency domain plot of log data, long period and short period
             FourierTransform.DFT(errorValsTcplx, FourierTransform.Direction.Forward);
@@ -171,9 +183,13 @@ namespace GuideLogAnalyzer
             for (int i = 1; i < (FFTLen / 2); i++)
             {
                 //fGraph.Points.Add(XPlusVals[i].Real);
-                FFTmagT = Math.Pow(errorValsTcplx[i].Real, 2) + Math.Pow(errorValsTcplx[i].Imaginary, 2);
-                FFTmagX = Math.Pow(errorValsXcplx[i].Real, 2) + Math.Pow(errorValsTcplx[i].Imaginary, 2);
-                FFTmagY = Math.Pow(errorValsYcplx[i].Real, 2) + Math.Pow(errorValsTcplx[i].Imaginary, 2);
+                //FFTmagT = Math.Pow(errorValsTcplx[i].Real, 2) + Math.Pow(errorValsTcplx[i].Imaginary, 2);
+                //FFTmagX = Math.Pow(errorValsXcplx[i].Real, 2) + Math.Pow(errorValsTcplx[i].Imaginary, 2);
+                //FFTmagY = Math.Pow(errorValsYcplx[i].Real, 2) + Math.Pow(errorValsTcplx[i].Imaginary, 2);
+
+                FFTmagT = errorValsTcplx[i].Magnitude;
+                FFTmagX = errorValsXcplx[i].Magnitude;
+                FFTmagY = errorValsYcplx[i].Magnitude;
 
                 errorFreq[i, 0] = FFTmagT;
                 errorFreq[i, 1] = FFTmagX;
@@ -280,8 +296,8 @@ namespace GuideLogAnalyzer
             ErrorRMSBox.Text = RMSStats[0].ToString("0.00") + " / " + RMSStats[1].ToString("0.00") + " / " + RMSStats[2].ToString("0.00");
             Show();
 
-            double[] WanderStats = Analysis.Wander(errorValsXdbl, errorValsYdbl, errorValsTdbl);
-            WanderBox.Text = WanderStats[0].ToString("0.0") + " / " + WanderStats[1].ToString("0.0") + " / " + WanderStats[2].ToString("0.0");
+            double[] DriftStats = Analysis.Drift(errorValsXcplx, errorValsYcplx, errorValsTcplx, FFTSampleRate);
+            DriftBox.Text = DriftStats[0].ToString("0.0") + " / " + DriftStats[1].ToString("0.0") + " / " + DriftStats[2].ToString("0.0");
             Show();
 
             double[] FreqMedStats = Analysis.FrequencyMedian(errorFreq);

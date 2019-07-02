@@ -110,42 +110,26 @@ namespace GuideLogAnalyzer
             return (RMS);
         }
 
-        public static double[] Wander(double[] errorXVal, double[] errorYVal, double[] errorTVal)
+        public static double[] Drift(Complex[] freqXVal, Complex[] freqYVal, Complex[] freqTVal, double DFTSampleRate)
         {
-            //Rroot mean sum of the squares of all error points, relative to mean value
-            double dCount = errorXVal.Length;
-            double sumXsquared = 0;
-            double sumYsquared = 0;
-            double sumXYsquared = 0;
-            double meanX = 0;
-            double meanY = 0;
-            double meanT = 0;
+            //Compute the total energies of frequencies above 30 seconds
+            //  DFTSampleRate is in cycles/second/sample (0-N/2)
 
-            //compute mean for error points
-            for (int i = 0; i < dCount; i++)
+            const double maxPeriod = 30;  //Seconds per cycle
+            //Calculate lowest frequency sample
+            int maxFFTsample = (int)(maxPeriod / DFTSampleRate);
+
+           double[] DriftVec = new double[3]{0, 0, 0};
+            if (maxFFTsample > freqXVal.Length) maxFFTsample = freqXVal.Length;
+
+            for (int i = 1; i < maxFFTsample; i++)
             {
-                meanX += errorXVal[i];
-                meanY += errorYVal[i];
-                meanT += errorTVal[i];
+                DriftVec[0] += freqXVal[i].Magnitude ;
+                DriftVec[1] += freqYVal[i].Magnitude;
+               DriftVec[2] += freqTVal[i].Magnitude;
             }
-            meanX = meanX / dCount;
-            meanY = meanY / dCount;
-            meanT = meanT / dCount;
-
-            double[] WMS = new double[3];
-
-            for (int i = 0; i < dCount; i++)
-            {
-                sumXsquared += Math.Pow(errorXVal[i] - meanX, 2);
-                sumYsquared += Math.Pow(errorYVal[i] - meanY, 2);
-                sumXYsquared += Math.Pow(errorTVal[i] - meanT, 2);
-            }
-            //Double result for full range of wander
-            WMS[0] = 2 * Math.Sqrt(sumXsquared / dCount);
-            WMS[1] = 2 * Math.Sqrt(sumYsquared / dCount);
-            WMS[2] = 2 * Math.Sqrt(sumXYsquared / dCount);
-
-            return (WMS);
+  
+            return (DriftVec);
         }
 
         public static double[] FrequencyMedian(double[,] errorVals)
