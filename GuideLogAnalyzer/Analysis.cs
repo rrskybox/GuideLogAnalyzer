@@ -110,25 +110,28 @@ namespace GuideLogAnalyzer
             return (RMS);
         }
 
-        public static double[] Drift(Complex[] freqXVal, Complex[] freqYVal, Complex[] freqTVal, double DFTSampleRate)
+        public static double[] MDRStats(Complex[] freqXVal, Complex[] freqYVal, Complex[] freqTVal, double DFTSampleRate)
         {
-            //Compute the total energies of frequencies above 30 seconds
+            //Compute the sum of difference in energies of X and Y at frequencies above 30 seconds, but below the drift (0 period value)
             //  DFTSampleRate is in cycles/second/sample (0-N/2)
 
-            const double maxPeriod = 30;  //Seconds per cycle
+            const double minPeriod = 30;  //Seconds per cycle
             //Calculate lowest frequency sample
-            int maxFFTsample = (int)(maxPeriod / DFTSampleRate);
+            int maxFFTsample = (int)(minPeriod / DFTSampleRate);
 
-           double[] DriftVec = new double[3]{0, 0, 0};
+
+            double[] DriftVec = new double[3] { 0, 0, 0 };
             if (maxFFTsample > freqXVal.Length) maxFFTsample = freqXVal.Length;
 
             for (int i = 1; i < maxFFTsample; i++)
             {
-                DriftVec[0] += freqXVal[i].Magnitude ;
+                DriftVec[0] += freqXVal[i].Magnitude;
                 DriftVec[1] += freqYVal[i].Magnitude;
-               DriftVec[2] += freqTVal[i].Magnitude;
+                DriftVec[2] += (freqXVal[i].Magnitude - freqYVal[i].Magnitude) / freqYVal[i].Magnitude;
             }
-  
+            DriftVec[0] = DriftVec[0] / maxFFTsample;
+            DriftVec[1] = DriftVec[1] / maxFFTsample;
+            DriftVec[2] = DriftVec[2] / maxFFTsample;
             return (DriftVec);
         }
 
@@ -171,6 +174,41 @@ namespace GuideLogAnalyzer
             return (meanFreqs);
         }
 
+        public static void RemoveOffsetAndSlope(ref double[] tData)
+        {
+            int dCount = tData.Length;
+            double sumXsquared = 0;
+            double sumYsquared = 0;
+            double sumXY = 0;
+            double sumX = 0;
+            double sumY = 0;
 
+            //Determine offset and slope of data using linear regression
+            // m = ( N*Σ(xy) − Σx Σy))/( N* Σ(x^2) − (Σx)^2)
+            // b =  (Σy − m Σx) / N
+            // where x is time domain and y is amplitude
+            // where N is number of points
+
+            //double[] flatData = new double[dCount];
+
+            for (int i = 0; i < dCount; i++)
+            {
+                sumY += tData[i];
+                sumX += i;
+                sumYsquared += Math.Pow(tData[i], 2);
+                sumXsquared += Math.Pow(i, 2);
+                sumXY += (i * tData[i]);
+            }
+
+            double slope = ((dCount * sumXY) - (sumX * sumY)) / ((dCount * sumXsquared) - Math.Pow(sumX, 2));
+            double offset = (sumY - (slope * sumX)) / dCount;
+
+            for (int i = 0; i < dCount; i++)
+            {
+                tData[i] = tData[i] - (slope * i) - offset;
+            }
+            return;
+
+        }
     }
 }

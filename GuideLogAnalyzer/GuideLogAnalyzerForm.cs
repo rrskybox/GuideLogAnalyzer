@@ -10,6 +10,8 @@
 /// V1.2  - Added a Wander error estimate:  2 x RMS difference between the error average and absolute position
 /// V1.3  - Removed Wander; added Wobble indicator.
 /// V1.4  - Added check for PE Index (worm) data presence
+/// V1.5  - Added vertical annotation lines for worm gear periods based on Paramount type
+///         Changed frequency graph to spline type and removed explicit data points
 ///
 
 using System;
@@ -18,6 +20,7 @@ using System.Drawing.Printing;
 using System.Numerics;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Deployment.Application;
 
 namespace GuideLogAnalyzer
 {
@@ -39,6 +42,10 @@ namespace GuideLogAnalyzer
         {
             InitializeComponent();
             printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
+            // Acquire the version information and put it in the form header
+            try { this.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(); }
+            catch { this.Text = " in Debug"; } //probably in debug, no version info available
+            this.Text = "PEC Collect V" + this.Text;
         }
 
         private void GuideLogFilePathBrowse_Click(object sender, EventArgs e)
@@ -47,7 +54,7 @@ namespace GuideLogAnalyzer
             DialogResult GuideLogPathResult = GuideLogFilenameDialog.ShowDialog();
             GuideLogFilePath.Text = GuideLogFilenameDialog.FileName;
             if (!GuideLogFilePath.Text.Contains(".log"))
-            { 
+            {
                 MessageBox.Show("File not a log file");
                 return;
             }
@@ -123,26 +130,40 @@ namespace GuideLogAnalyzer
             double[] wormIndexRA = new double[vLen];
             double[] wormIndexDec = new double[vLen];
 
-
             double FFTTimeIncrement = 0; //time per sample in sec
             double nowTime = 0;
 
-            //time domain plot of log data, total, X and Y
+            //time domain plot of log data, total, X and Y, mean
             for (int i = 0; i < vLen; i++)
             {
                 errorValsTdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.TotGuideErr);
                 errorValsXdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideErrX);
                 errorValsYdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideErrY);
-                errorValsTcplx[i] = new Complex(errorValsTdbl[i], 0);
-                errorValsXcplx[i] = new Complex(errorValsXdbl[i], 0);
-                errorValsYcplx[i] = new Complex(errorValsYdbl[i], 0);
+
                 correctionXPlus[i] = guideLog.GetLogValue(i, LogReader.LogVal.XPlusRelay);
                 correctionXMinus[i] = guideLog.GetLogValue(i, LogReader.LogVal.XMinusRelay);
                 correctionYPlus[i] = guideLog.GetLogValue(i, LogReader.LogVal.XPlusRelay);
                 correctionYMinus[i] = guideLog.GetLogValue(i, LogReader.LogVal.YMinusRelay);
                 wormIndexRA[i] = guideLog.GetLogValue(i, LogReader.LogVal.PECIndexRA);
                 wormIndexDec[i] = guideLog.GetLogValue(i, LogReader.LogVal.PECIndexDec);
+            }
 
+            if (RemoveDriftCheckBox.Checked)
+            {
+                Analysis.RemoveOffsetAndSlope(ref errorValsTdbl);
+                Analysis.RemoveOffsetAndSlope(ref errorValsXdbl);
+                Analysis.RemoveOffsetAndSlope(ref errorValsYdbl);
+            }
+
+            for (int i = 0; i < vLen; i++)
+            {
+                errorValsTcplx[i] = new Complex(errorValsTdbl[i], 0);
+                errorValsXcplx[i] = new Complex(errorValsXdbl[i], 0);
+                errorValsYcplx[i] = new Complex(errorValsYdbl[i], 0);
+            }
+
+            for (int i = 0; i < vLen; i++)
+            {
                 nowTime = guideLog.GetLogValue(i, LogReader.LogVal.ElapsedSecs);
                 if (i < (vLen - 1))
                 {
@@ -151,14 +172,15 @@ namespace GuideLogAnalyzer
                 tGraphT.Points.AddXY((nowTime / 60), errorValsTcplx[i].Real);
                 tGraphX.Points.AddXY((nowTime / 60), errorValsXcplx[i].Real);
                 tGraphY.Points.AddXY((nowTime / 60), errorValsYcplx[i].Real);
-                tGraphT.Color = Color.Red;
-                tGraphX.Color = Color.Blue;
-                tGraphY.Color = Color.Green;
             }
+            tGraphT.Color = Color.Red;
+            tGraphX.Color = Color.Blue;
+            tGraphY.Color = Color.Green;
+
             Show();
             //Determine if wormIndex data is present and post results
             double pesum = 0;
-            for (int i=0;i<vLen;i++) { pesum += (wormIndexDec[i] + wormIndexRA[i]); }
+            for (int i = 0; i < vLen; i++) { pesum += (wormIndexDec[i] + wormIndexRA[i]); }
             if (pesum == 0) PEIndexTextBox.Text = "No";
             else PEIndexTextBox.Text = "Yes";
 
@@ -176,7 +198,7 @@ namespace GuideLogAnalyzer
             double FFTmagY = 0;
             double FFTperiod = 0;
             //double maxFreq = FFTFreqIncrement * (FFTLen / 2);
-            int maxLongPeriod = 5; //minutes
+            int maxLongPeriod = 6; //minutes
             double maxShortPeriod = .5; //minutes
             double[,] errorFreq = new double[FFTLen / 2, 3];
 
@@ -230,7 +252,7 @@ namespace GuideLogAnalyzer
             cGraphPX.Points[cGraphPX.Points.Count - 1].MarkerStyle = MarkerStyle.Cross;
             cGraphPX.Points.Add(0, 0);
             cGraphPX.Points.AddXY(xmAngle, xmSpeed);
-            cGraphPX.Points[cGraphPX.Points.Count - 1].MarkerStyle = MarkerStyle.Circle ;
+            cGraphPX.Points[cGraphPX.Points.Count - 1].MarkerStyle = MarkerStyle.Circle;
             cGraphPY.Points.Add(0, 0);
             cGraphPY.Points.AddXY(ypAngle, ypSpeed);
             cGraphPY.Points[cGraphPY.Points.Count - 1].MarkerStyle = MarkerStyle.Cross;
@@ -256,6 +278,111 @@ namespace GuideLogAnalyzer
                     point.MarkerStyle = MarkerStyle.None;
                 }
                 else point.IsValueShownAsLabel = true;
+            }
+            //Add vertical lines for Paramount 
+            ChartArea CA = chart2.ChartAreas[0];
+            double hPeriod = 0;
+            if (MountBox.Text.Contains("MX")) hPeriod = 229.77;
+            else if (MountBox.Text.Contains("MYT")) hPeriod = 269.26;
+            else if (MountBox.Text.Contains("ME")) hPeriod = 149.99;
+
+            if (hPeriod != 0)
+            {
+                chart2.Annotations.Clear();
+
+                double harmonic0 = hPeriod / 60;
+                double harmonic1 = harmonic0 / 2;
+                double harmonic2 = harmonic0 / 3;
+                double harmonic3 = harmonic0 / 4;
+                double harmonic4 = harmonic0 / 5;
+                double harmonic5 = harmonic0 / 6;
+                double harmonic6 = harmonic0 / 7;
+
+                VerticalLineAnnotation VA0 = new VerticalLineAnnotation
+                {
+                    AxisX = CA.AxisX,
+                    AllowMoving = false,
+                    IsInfinitive = true,
+                    ClipToChartArea = CA.Name,
+                    Name = "myLine0",
+                    LineColor = Color.DarkOrange,
+                    LineWidth = 2,
+                    X = harmonic0
+                };
+                VerticalLineAnnotation VA1 = new VerticalLineAnnotation
+                {
+                    AxisX = CA.AxisX,
+                    AllowMoving = false,
+                    IsInfinitive = true,
+                    ClipToChartArea = CA.Name,
+                    Name = "myLine1",
+                    LineColor = Color.DarkOrange,
+                    LineWidth = 2,
+                    X = harmonic1
+                };
+                VerticalLineAnnotation VA2 = new VerticalLineAnnotation
+                {
+                    AxisX = CA.AxisX,
+                    AllowMoving = false,
+                    IsInfinitive = true,
+                    ClipToChartArea = CA.Name,
+                    Name = "myLine2",
+                    LineColor = Color.DarkOrange,
+                    LineWidth = 2,
+                    X = harmonic2
+                };
+                VerticalLineAnnotation VA3 = new VerticalLineAnnotation
+                {
+                    AxisX = CA.AxisX,
+                    AllowMoving = false,
+                    IsInfinitive = true,
+                    ClipToChartArea = CA.Name,
+                    Name = "myLine3",
+                    LineColor = Color.DarkOrange,
+                    LineWidth = 2,         // use your numbers!
+                    X = harmonic3
+                };
+                VerticalLineAnnotation VA4 = new VerticalLineAnnotation
+                {
+                    AxisX = CA.AxisX,
+                    AllowMoving = false,
+                    IsInfinitive = true,
+                    ClipToChartArea = CA.Name,
+                    Name = "myLine4",
+                    LineColor = Color.DarkOrange,
+                    LineWidth = 2,         // use your numbers!
+                    X = harmonic4
+                };
+                VerticalLineAnnotation VA5 = new VerticalLineAnnotation
+                {
+                    AxisX = CA.AxisX,
+                    AllowMoving = false,
+                    IsInfinitive = true,
+                    ClipToChartArea = CA.Name,
+                    Name = "myLine5",
+                    LineColor = Color.DarkOrange,
+                    LineWidth = 2,         // use your numbers!
+                    X = harmonic5
+                };
+                VerticalLineAnnotation VA6 = new VerticalLineAnnotation
+                {
+                    AxisX = CA.AxisX,
+                    AllowMoving = false,
+                    IsInfinitive = true,
+                    ClipToChartArea = CA.Name,
+                    Name = "myLine6",
+                    LineColor = Color.DarkOrange,
+                    LineWidth = 2,         // use your numbers!
+                    X = harmonic6
+                };
+
+                chart2.Annotations.Add(VA0);
+                chart2.Annotations.Add(VA1);
+                chart2.Annotations.Add(VA2);
+                chart2.Annotations.Add(VA3);
+                chart2.Annotations.Add(VA4);
+                chart2.Annotations.Add(VA5);
+                chart2.Annotations.Add(VA6);
             }
 
             Show();
@@ -296,24 +423,27 @@ namespace GuideLogAnalyzer
             ErrorRMSBox.Text = RMSStats[0].ToString("0.00") + " / " + RMSStats[1].ToString("0.00") + " / " + RMSStats[2].ToString("0.00");
             Show();
 
-            double[] DriftStats = Analysis.Drift(errorValsXcplx, errorValsYcplx, errorValsTcplx, FFTSampleRate);
-            DriftBox.Text = DriftStats[0].ToString("0.0") + " / " + DriftStats[1].ToString("0.0") + " / " + DriftStats[2].ToString("0.0");
-            Show();
+            double[] mdrStats = Analysis.MDRStats(errorValsXcplx, errorValsYcplx, errorValsTcplx, FFTSampleRate);
+            //double sigToNoiseAvg = (mdrStats[0] - mdrStats[1]) / mdrStats[1];
+            MDRBox.Text = (mdrStats[2]*100).ToString("0")+" %";
 
             double[] FreqMedStats = Analysis.FrequencyMedian(errorFreq);
             double iToF = FFTSampleRate / FFTLen;
             FrequencyBalanceBox.Text = (1 / (iToF * FreqMedStats[0])).ToString("0") + " sec / " + (1 / (iToF * FreqMedStats[1])).ToString("0") + " sec";
 
+            Show();
         }
 
         private void PrepGraphs()
         {
             //Prep the time domain graph
             chart1.Series.Clear();
-            tGraphT = new Series("Total Error");
-            tGraphT.XValueType = ChartValueType.Int32;
-            tGraphT.ChartType = SeriesChartType.FastLine;
-            tGraphT.MarkerStyle = MarkerStyle.Circle;
+            tGraphT = new Series("Total Error")
+            {
+                XValueType = ChartValueType.Int32,
+                ChartType = SeriesChartType.FastLine,
+                MarkerStyle = MarkerStyle.Circle
+            };
 
             chart1.Series.Add(tGraphT);
             tGraphX = new Series("X Error");
@@ -333,40 +463,40 @@ namespace GuideLogAnalyzer
             fGraphT = new Series("Total Error");
             chart2.Series.Add(fGraphT);
             fGraphT.XValueType = ChartValueType.Int32;
-            fGraphT.ChartType = SeriesChartType.FastLine;
-            fGraphT.MarkerStyle = MarkerStyle.Circle;
+            fGraphT.ChartType = SeriesChartType.Spline;
+            //fGraphT.MarkerStyle = MarkerStyle.Circle;
 
             fGraphX = new Series("X Error");
             chart2.Series.Add(fGraphX);
             fGraphX.XValueType = ChartValueType.Int32;
-            fGraphX.ChartType = SeriesChartType.FastLine;
-            fGraphX.MarkerStyle = MarkerStyle.Circle;
+            fGraphX.ChartType = SeriesChartType.Spline;
+            //fGraphX.MarkerStyle = MarkerStyle.Circle;
 
             fGraphY = new Series("Y Error");
             chart2.Series.Add(fGraphY);
             fGraphY.XValueType = ChartValueType.Int32;
-            fGraphY.ChartType = SeriesChartType.FastLine;
-            fGraphY.MarkerStyle = MarkerStyle.Circle;
+            fGraphY.ChartType = SeriesChartType.Spline;
+            //fGraphY.MarkerStyle = MarkerStyle.Circle;
 
             //Prep the shorter frequency domain chart
             chart3.Series.Clear();
             mGraphT = new Series("Total Error");
             chart3.Series.Add(mGraphT);
             mGraphT.XValueType = ChartValueType.Int32;
-            mGraphT.ChartType = SeriesChartType.FastLine;
-            mGraphT.MarkerStyle = MarkerStyle.Circle;
+            mGraphT.ChartType = SeriesChartType.Spline;
+            // mGraphT.MarkerStyle = MarkerStyle.Circle;
 
             mGraphX = new Series("X Error");
             chart3.Series.Add(mGraphX);
             mGraphX.XValueType = ChartValueType.Int32;
-            mGraphX.ChartType = SeriesChartType.FastLine;
-            mGraphX.MarkerStyle = MarkerStyle.Circle;
+            mGraphX.ChartType = SeriesChartType.Spline;
+            //mGraphX.MarkerStyle = MarkerStyle.Circle;
 
             mGraphY = new Series("Y Error");
             chart3.Series.Add(mGraphY);
             mGraphY.XValueType = ChartValueType.Int32;
-            mGraphY.ChartType = SeriesChartType.FastLine;
-            mGraphY.MarkerStyle = MarkerStyle.Circle;
+            mGraphY.ChartType = SeriesChartType.Spline;
+            //mGraphY.MarkerStyle = MarkerStyle.Circle;
 
             chart4.Series.Clear();
             cGraphPX = new Series("CalibrationPX");

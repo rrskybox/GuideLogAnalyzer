@@ -79,7 +79,7 @@
             this.SwitchBackPercentBox = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.DriftBox = new System.Windows.Forms.TextBox();
+            this.MDRBox = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.FrequencyBalanceBox = new System.Windows.Forms.TextBox();
@@ -127,6 +127,7 @@
             this.HelpButton = new System.Windows.Forms.Button();
             this.label38 = new System.Windows.Forms.Label();
             this.PEIndexTextBox = new System.Windows.Forms.TextBox();
+            this.RemoveDriftCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
@@ -218,7 +219,7 @@
             this.chart2.Location = new System.Drawing.Point(16, 284);
             this.chart2.Name = "chart2";
             series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastPoint;
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
@@ -583,7 +584,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.DriftBox);
+            this.groupBox4.Controls.Add(this.MDRBox);
             this.groupBox4.Controls.Add(this.label20);
             this.groupBox4.Controls.Add(this.label37);
             this.groupBox4.Controls.Add(this.FrequencyBalanceBox);
@@ -600,13 +601,13 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Error Statistics";
             // 
-            // DriftBox
+            // MDRBox
             // 
-            this.DriftBox.Location = new System.Drawing.Point(135, 97);
-            this.DriftBox.Name = "DriftBox";
-            this.DriftBox.Size = new System.Drawing.Size(107, 20);
-            this.DriftBox.TabIndex = 31;
-            this.DriftBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.MDRBox.Location = new System.Drawing.Point(135, 97);
+            this.MDRBox.Name = "MDRBox";
+            this.MDRBox.Size = new System.Drawing.Size(107, 20);
+            this.MDRBox.TabIndex = 31;
+            this.MDRBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label20
             // 
@@ -623,11 +624,11 @@
             // 
             this.label37.AutoSize = true;
             this.label37.ForeColor = System.Drawing.SystemColors.Control;
-            this.label37.Location = new System.Drawing.Point(6, 100);
+            this.label37.Location = new System.Drawing.Point(6, 97);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(98, 13);
+            this.label37.Size = new System.Drawing.Size(116, 26);
             this.label37.TabIndex = 30;
-            this.label37.Text = "Wobble X/Y/Total ";
+            this.label37.Text = "PE Margin over Seeing\r\n    (if PA = 0 or 180)";
             // 
             // FrequencyBalanceBox
             // 
@@ -1064,12 +1065,25 @@
             this.PEIndexTextBox.TabIndex = 55;
             this.PEIndexTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // RemoveDriftCheckBox
+            // 
+            this.RemoveDriftCheckBox.AutoSize = true;
+            this.RemoveDriftCheckBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.RemoveDriftCheckBox.Location = new System.Drawing.Point(1012, 13);
+            this.RemoveDriftCheckBox.Name = "RemoveDriftCheckBox";
+            this.RemoveDriftCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.RemoveDriftCheckBox.Size = new System.Drawing.Size(88, 17);
+            this.RemoveDriftCheckBox.TabIndex = 57;
+            this.RemoveDriftCheckBox.Text = "Remove Drift";
+            this.RemoveDriftCheckBox.UseVisualStyleBackColor = true;
+            // 
             // GuideLogAnalyzerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.ClientSize = new System.Drawing.Size(1258, 842);
+            this.Controls.Add(this.RemoveDriftCheckBox);
             this.Controls.Add(this.label38);
             this.Controls.Add(this.PEIndexTextBox);
             this.Controls.Add(this.HelpButton);
@@ -1224,10 +1238,11 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Button HelpButton;
-        private System.Windows.Forms.TextBox DriftBox;
+        private System.Windows.Forms.TextBox MDRBox;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox PEIndexTextBox;
+        private System.Windows.Forms.CheckBox RemoveDriftCheckBox;
     }
 }
 
