@@ -146,7 +146,7 @@ namespace GuideLogAnalyzer
                 LogArray[valIdx, 11] = Convert.ToDouble(gElements[12]);
                 LogArray[valIdx, 12] = Convert.ToDouble(gElements[13]);
                 LogArray[valIdx, 13] = Convert.ToDouble(gElements[14]);
-                LogArray[valIdx, 14] = 0;
+                LogArray[valIdx, 14] = ConvertSat(gElements[15]);
                 LogArray[valIdx, 15] = 0;
                 valIdx++;
                 scanLine = logDataFile.ReadLine();
@@ -254,6 +254,13 @@ namespace GuideLogAnalyzer
             string iStr = itext.Substring(itext.IndexOf("=") + 1);
             iStr = iStr.Replace("STD", "");
             return DateTime.Parse(iStr);
+        }
+
+        private double ConvertSat(string satText)
+        {
+            if (satText.Contains("Sat")) return 1;
+            if (satText.Contains("Lost")) return 2;
+            else return 0;
         }
     }
 }

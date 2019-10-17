@@ -129,11 +129,12 @@ namespace GuideLogAnalyzer
             Double[] correctionYMinus = new double[vLen];
             double[] wormIndexRA = new double[vLen];
             double[] wormIndexDec = new double[vLen];
+            double[] guideStarSignal = new double[vLen];
 
             double FFTTimeIncrement = 0; //time per sample in sec
             double nowTime = 0;
 
-            //time domain plot of log data, total, X and Y, mean
+            //time domain plot of log data, total, X and Y, mean, and guidestarsignal
             for (int i = 0; i < vLen; i++)
             {
                 errorValsTdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.TotGuideErr);
@@ -146,6 +147,7 @@ namespace GuideLogAnalyzer
                 correctionYMinus[i] = guideLog.GetLogValue(i, LogReader.LogVal.YMinusRelay);
                 wormIndexRA[i] = guideLog.GetLogValue(i, LogReader.LogVal.PECIndexRA);
                 wormIndexDec[i] = guideLog.GetLogValue(i, LogReader.LogVal.PECIndexDec);
+                guideStarSignal [i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideStarSignal);
             }
 
             if (RemoveDriftCheckBox.Checked)
@@ -387,7 +389,11 @@ namespace GuideLogAnalyzer
 
             Show();
 
-            //
+            //Determine the percentage of saturated star observations
+            double percentSat = Analysis.PercentSaturated(guideStarSignal);
+            double percentLost = Analysis.PercentLost(guideStarSignal);
+            SaturatedTextBox.Text = percentSat.ToString("0.0")+"% / " + percentLost.ToString("0.0") + "%";
+
             //Determine percentage of moves vrs non-moves in X and Y
             double movePointsXPlus = Analysis.PercentErrorsCorrected(correctionXPlus);
             double movePointsXMinus = Analysis.PercentErrorsCorrected(correctionXMinus);

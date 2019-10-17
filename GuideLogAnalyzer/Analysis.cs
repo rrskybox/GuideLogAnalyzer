@@ -10,11 +10,37 @@ namespace GuideLogAnalyzer
     public static class Analysis
     {
 
+        public static double PercentSaturated(double[] correctionVal)
+        {
+            //Counts the number of errors that result in a non-zero correction
+            //  as a percentage of total error points (all)
+            double nmCount = 0;
+            for (int i = 0; i < correctionVal.Length; i++)
+            {
+                if (correctionVal[i] == 1)
+                { nmCount += 1; }
+            }
+            return ((nmCount * 100) / correctionVal.Length);
+        }
+
+        public static double PercentLost(double[] correctionVal)
+        {
+            //Counts the number of errors that result in a non-zero correction
+            //  as a percentage of total error points (all)
+            double nmCount = 0;
+            for (int i = 0; i < correctionVal.Length; i++)
+            {
+                if (correctionVal[i] == 2)
+                { nmCount += 1; }
+            }
+            return ((nmCount * 100) / correctionVal.Length);
+        }
+
         public static double PercentErrorsCorrected(double[] correctionVal)
         {
             //Counts the number of errors that result in a non-zero correction
             //  as a percentage of total error points (all)
-            int nmCount = 0;
+            double nmCount = 0;
             for (int i = 0; i < correctionVal.Length; i++)
             {
                 if (correctionVal[i] != 0)
@@ -27,7 +53,7 @@ namespace GuideLogAnalyzer
         {
             //Counts the number of errors that result in a non-zero correction (X,Y)
             //  as a percentage of total error points
-            int nmCount = 0;
+            double nmCount = 0;
             for (int i = 0; i < correctionPlusVal.Length; i++)
             {
                 if ((correctionPlusVal[i] != 0) || (correctionMinusVal[i] != 0))
@@ -40,7 +66,7 @@ namespace GuideLogAnalyzer
         {
             //Counts the number of errors that result in a non-zero correction (X+,X-,Y+,Y-)
             //  as a percentage of total error points
-            int nmCount = 0;
+            double nmCount = 0;
             for (int i = 0; i < correctionXPlusVal.Length; i++)
             {
                 if ((correctionXPlusVal[i] > 0) || (correctionXMinusVal[i] > 0) || (correctionYPlusVal[i] > 0) || (correctionYMinusVal[i] > 0))
@@ -53,7 +79,7 @@ namespace GuideLogAnalyzer
         {
             //Counting the number of times that a correction in one direction is followed by a correction in the other direction
             //  as a percentage of correction cycles
-            int nmCount = 0;
+            double nmCount = 0;
             for (int i = 0; i < correctionPlusVal.Length - 1; i++)
             {
                 if (((correctionPlusVal[i] > 0) && (correctionMinusVal[i + 1] > 0)) || ((correctionMinusVal[i] > 0) && (correctionPlusVal[i + 1] > 0)))
@@ -66,7 +92,7 @@ namespace GuideLogAnalyzer
         {
             //Counting the number of times that a correction in one direction is followed by a correction in the same direction
             //  as a percentage of correction cycles
-            int nmCount = 0;
+            double nmCount = 0;
             for (int i = 0; i < correctionPlusVal.Length - 1; i++)
             {
                 if (((correctionPlusVal[i] > 0) && (correctionPlusVal[i + 1] > 0)) || ((correctionMinusVal[i] > 0) && (correctionMinusVal[i + 1] > 0)))
@@ -79,7 +105,7 @@ namespace GuideLogAnalyzer
         {
             //Counting the number of times that a positive (negative) error is followed by a negative (positive) error
             //  as a percentage of correction cycles
-            int nmCount = 0;
+            double nmCount = 0;
             for (int i = 0; i < errorVal.Length - 1; i++)
             {
                 if (((errorVal[i] > 0) && (errorVal[i + 1] < 0)) || ((errorVal[i] < 0) && (errorVal[i + 1] > 0)))
