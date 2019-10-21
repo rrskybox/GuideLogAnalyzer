@@ -45,7 +45,7 @@ namespace GuideLogAnalyzer
             // Acquire the version information and put it in the form header
             try { this.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(); }
             catch { this.Text = " in Debug"; } //probably in debug, no version info available
-            this.Text = "PEC Collect V" + this.Text;
+            this.Text = "Guide Log Analyzer V" + this.Text;
         }
 
         private void GuideLogFilePathBrowse_Click(object sender, EventArgs e)
