@@ -24,7 +24,7 @@ using System.Deployment.Application;
 
 namespace GuideLogAnalyzer
 {
-    public partial class GuideLogAnalyzerForm : Form
+    public partial class FormGuideLogAnalyzer : Form
     {
         public Series tGraphT;
         public Series tGraphX;
@@ -38,7 +38,7 @@ namespace GuideLogAnalyzer
         public Series cGraphPX;
         public Series cGraphPY;
 
-        public GuideLogAnalyzerForm()
+        public FormGuideLogAnalyzer()
         {
             InitializeComponent();
             printDocument1.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);

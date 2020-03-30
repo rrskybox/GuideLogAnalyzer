@@ -67,6 +67,7 @@ namespace GuideLogAnalyzer
         //int AO_Track_Box_Size = 32;
 
         double[,] LogArray = new double[1, 16];
+        int LogLength = 0;
 
         public LogReader(string logFilePath)
         {
@@ -117,38 +118,45 @@ namespace GuideLogAnalyzer
             char delimiter = Convert.ToChar("|");
             string[] gElements = new string[1];
 
-            int valIdx = 0;
+            bool reSettingError = false;
+            LogLength = 0;
             scanLine = logDataFile.ReadLine();
             while (scanLine != null)
             {
                 gElements = scanLine.Split(delimiter);
-
                 try
-                { LogArray[valIdx, 0] = Convert.ToDouble(gElements[1]); }
+                {
+                    LogArray[LogLength, 0] = Convert.ToDouble(gElements[1]);
+                    //Continue conversion of file
+                    LogArray[LogLength, 1] = Convert.ToDouble(gElements[2]);
+                    LogArray[LogLength, 2] = Convert.ToDouble(gElements[3]);
+                    LogArray[LogLength, 3] = Convert.ToDouble(gElements[4]);
+                    LogArray[LogLength, 4] = Convert.ToDouble(gElements[5]);
+                    LogArray[LogLength, 5] = Convert.ToDouble(gElements[6]);
+                    LogArray[LogLength, 6] = Convert.ToDouble(gElements[7]);
+                    LogArray[LogLength, 7] = Convert.ToDouble(gElements[8]);
+                    LogArray[LogLength, 8] = Convert.ToDouble(gElements[9]);
+                    LogArray[LogLength, 9] = Convert.ToDouble(gElements[10]);
+                    LogArray[LogLength, 10] = Convert.ToDouble(gElements[11]);
+                    LogArray[LogLength, 11] = Convert.ToDouble(gElements[12]);
+                    LogArray[LogLength, 12] = Convert.ToDouble(gElements[13]);
+                    LogArray[LogLength, 13] = Convert.ToDouble(gElements[14]);
+                    LogArray[LogLength, 14] = ConvertSat(gElements[15]);
+                    LogArray[LogLength, 15] = 0;
+                    LogLength++;
+                }
                 catch
                 {
-                    System.Windows.Forms.MessageBox.Show("Incompatible file contents found.  Aborting file conversion.",
-                                                          "File Conversion Error",
-                                                          System.Windows.Forms.MessageBoxButtons.OK);
-                    return;
+                    if (!reSettingError)
+                    {
+                        reSettingError = true;
+                        System.Windows.Forms.DialogResult sNext = System.Windows.Forms.MessageBox.Show("Unexpected file contents encountered.  " +
+                         "Log probably contains mid-run correction setting changes which will compromise frequency analysis. Continue anyway?",
+                     "Data Conversion Error",
+                     System.Windows.Forms.MessageBoxButtons.YesNo);
+                        if (sNext == System.Windows.Forms.DialogResult.No) return;
+                    }
                 }
-                //Continue conversion of file
-                LogArray[valIdx, 1] = Convert.ToDouble(gElements[2]);
-                LogArray[valIdx, 2] = Convert.ToDouble(gElements[3]);
-                LogArray[valIdx, 3] = Convert.ToDouble(gElements[4]);
-                LogArray[valIdx, 4] = Convert.ToDouble(gElements[5]);
-                LogArray[valIdx, 5] = Convert.ToDouble(gElements[6]);
-                LogArray[valIdx, 6] = Convert.ToDouble(gElements[7]);
-                LogArray[valIdx, 7] = Convert.ToDouble(gElements[8]);
-                LogArray[valIdx, 8] = Convert.ToDouble(gElements[9]);
-                LogArray[valIdx, 9] = Convert.ToDouble(gElements[10]);
-                LogArray[valIdx, 10] = Convert.ToDouble(gElements[11]);
-                LogArray[valIdx, 11] = Convert.ToDouble(gElements[12]);
-                LogArray[valIdx, 12] = Convert.ToDouble(gElements[13]);
-                LogArray[valIdx, 13] = Convert.ToDouble(gElements[14]);
-                LogArray[valIdx, 14] = ConvertSat(gElements[15]);
-                LogArray[valIdx, 15] = 0;
-                valIdx++;
                 scanLine = logDataFile.ReadLine();
             }
             return;
@@ -162,7 +170,8 @@ namespace GuideLogAnalyzer
 
         public int GetLogSize()
         {
-            return LogArray.GetLength(0);
+            //return LogArray.GetLength(0)
+            return LogLength;
         }
 
         public double GetMountVelocityVector(Calibration wVector, Vector wComponent)
