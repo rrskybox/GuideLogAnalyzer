@@ -28,8 +28,8 @@
     <SuiteName>TSXToolkit</SuiteName>
     <WebPage>publish.html</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>51</ApplicationRevision>
-    <ApplicationVersion>1.7.0.%2a</ApplicationVersion>
+    <ApplicationRevision>52</ApplicationRevision>
+    <ApplicationVersion>1.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
