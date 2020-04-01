@@ -53,6 +53,12 @@ namespace GuideLogAnalyzer
 
             DialogResult GuideLogPathResult = GuideLogFilenameDialog.ShowDialog();
             GuideLogFilePath.Text = GuideLogFilenameDialog.FileName;
+            CompileForm();
+        }
+
+        private void CompileForm()
+        {
+
             if (!GuideLogFilePath.Text.Contains(".log"))
             {
                 MessageBox.Show("File not a log file");
@@ -96,8 +102,9 @@ namespace GuideLogAnalyzer
             MoveBox.Text = xH.Detail(xH.MinimumMove) + " (sec) / " + xH.Detail(xH.MaximumMove) + " (sec)";
             int binX = Convert.ToInt16(xH.Detail("BinX"));
             int binY = Convert.ToInt16(xH.Detail("BinY"));
-            double scaleX = 0;
-            double scaleY = 0;
+            double scaleX = 1 / binX;
+            double scaleY = 1 / binY;
+
             string scaleXString = xH.Detail("ImageScaleXatbinning" + binX.ToString("0"));
             string scaleYString = xH.Detail("ImageScaleYatbinning" + binY.ToString("0"));
             if (scaleXString != "NA")
@@ -105,6 +112,8 @@ namespace GuideLogAnalyzer
             if (scaleYString != "NA")
             { scaleY = Convert.ToDouble(scaleYString); }
 
+            //scaleT = Math.Sqrt(Math.Pow(scaleX, 2) + Math.Pow(scaleY, 2));
+            double scaleT = scaleX;
             ImageScaleBox.Text = scaleXString + " / " + scaleYString;
 
             AOAggressivenessBox.Text = xH.Detail(xH.AOAggressiveness);
@@ -137,9 +146,9 @@ namespace GuideLogAnalyzer
             //time domain plot of log data, total, X and Y, mean, and guidestarsignal
             for (int i = 0; i < vLen; i++)
             {
-                errorValsTdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.TotGuideErr);
-                errorValsXdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideErrX);
-                errorValsYdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideErrY);
+                errorValsTdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.TotGuideErr) * scaleT;
+                errorValsXdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideErrX) * scaleX;
+                errorValsYdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideErrY) * scaleY;
 
                 correctionXPlus[i] = guideLog.GetLogValue(i, LogReader.LogVal.XPlusRelay);
                 correctionXMinus[i] = guideLog.GetLogValue(i, LogReader.LogVal.XMinusRelay);
@@ -147,7 +156,7 @@ namespace GuideLogAnalyzer
                 correctionYMinus[i] = guideLog.GetLogValue(i, LogReader.LogVal.YMinusRelay);
                 wormIndexRA[i] = guideLog.GetLogValue(i, LogReader.LogVal.PECIndexRA);
                 wormIndexDec[i] = guideLog.GetLogValue(i, LogReader.LogVal.PECIndexDec);
-                guideStarSignal [i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideStarSignal);
+                guideStarSignal[i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideStarSignal);
             }
 
             if (RemoveDriftCheckBox.Checked)
@@ -392,7 +401,7 @@ namespace GuideLogAnalyzer
             //Determine the percentage of saturated star observations
             double percentSat = Analysis.PercentSaturated(guideStarSignal);
             double percentLost = Analysis.PercentLost(guideStarSignal);
-            SaturatedTextBox.Text = percentSat.ToString("0.0")+"% / " + percentLost.ToString("0.0") + "%";
+            SaturatedTextBox.Text = percentSat.ToString("0.0") + "% / " + percentLost.ToString("0.0") + "%";
 
             //Determine percentage of moves vrs non-moves in X and Y
             double movePointsXPlus = Analysis.PercentErrorsCorrected(correctionXPlus);
@@ -431,7 +440,7 @@ namespace GuideLogAnalyzer
 
             double[] mdrStats = Analysis.MDRStats(errorValsXcplx, errorValsYcplx, errorValsTcplx, FFTSampleRate);
             //double sigToNoiseAvg = (mdrStats[0] - mdrStats[1]) / mdrStats[1];
-            MDRBox.Text = (mdrStats[2]*100).ToString("0")+" %";
+            MDRBox.Text = (mdrStats[2] * 100).ToString("0") + " %";
 
             double[] FreqMedStats = Analysis.FrequencyMedian(errorFreq);
             double iToF = FFTSampleRate / FFTLen;
@@ -582,6 +591,12 @@ namespace GuideLogAnalyzer
         {
             Form fHelp = new FormHelp();
             fHelp.Show();
+        }
+
+        private void RemoveDriftCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CompileForm();
+            return;
         }
     }
 }

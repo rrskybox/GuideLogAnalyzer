@@ -148,7 +148,6 @@
             this.GuideLogFilePath.Name = "GuideLogFilePath";
             this.GuideLogFilePath.Size = new System.Drawing.Size(827, 20);
             this.GuideLogFilePath.TabIndex = 0;
-            this.GuideLogFilePath.Text = "C:\\Users\\Rick\\OneDrive\\Astroimaging\\SB Wiki\\Articles\\Autoguide Diagnosis";
             // 
             // label1
             // 
@@ -1098,6 +1097,7 @@
             this.RemoveDriftCheckBox.TabIndex = 57;
             this.RemoveDriftCheckBox.Text = "Remove Drift";
             this.RemoveDriftCheckBox.UseVisualStyleBackColor = true;
+            this.RemoveDriftCheckBox.CheckedChanged += new System.EventHandler(this.RemoveDriftCheckBox_CheckedChanged);
             // 
             // label39
             // 
