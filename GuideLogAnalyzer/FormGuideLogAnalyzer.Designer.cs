@@ -79,6 +79,8 @@
             this.SwitchBackPercentBox = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.AvgDriftTextBox = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
             this.MDRBox = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
@@ -185,20 +187,21 @@
             chartArea1.AxisX.MajorTickMark.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Auto;
             chartArea1.AxisX.MinorGrid.Enabled = true;
             chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisX.Title = "Guide Error (arcsec)";
+            chartArea1.AxisX.Title = "Elapsed Time (Minutes)";
+            chartArea1.AxisY.Title = "Deviation (arcsec)";
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
-            legend1.Title = "Guide Errors over Time";
+            legend1.Title = " Tracking Error";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(15, 98);
+            this.chart1.Location = new System.Drawing.Point(16, 98);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastPoint;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1231, 180);
+            this.chart1.Size = new System.Drawing.Size(1231, 233);
             this.chart1.TabIndex = 3;
             this.chart1.Text = "chart1";
             // 
@@ -211,17 +214,18 @@
             chartArea2.AxisX.MajorTickMark.Enabled = false;
             chartArea2.AxisX.MinorGrid.Enabled = true;
             chartArea2.AxisX.MinorGrid.LineColor = System.Drawing.Color.Silver;
-            chartArea2.AxisX.Title = "Frequency Spectrum in Minutes";
+            chartArea2.AxisX.Title = "Error Period (Minutes/Cycle)";
             chartArea2.AxisY.MajorGrid.Interval = 0D;
             chartArea2.AxisY.MajorGrid.IntervalOffset = 0D;
             chartArea2.AxisY.MajorGrid.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Auto;
             chartArea2.AxisY.MajorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea2.AxisY.Title = "Energy (arcsec)";
             chartArea2.Name = "ChartArea1";
             this.chart2.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
-            legend2.Title = "Mount Dominated Range";
+            legend2.Title = "Periodicity\\n\\nMount Dominated Range";
             this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(16, 284);
+            this.chart2.Location = new System.Drawing.Point(16, 336);
             this.chart2.Name = "chart2";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -235,7 +239,7 @@
             // 
             // SampleRateBox
             // 
-            this.SampleRateBox.Location = new System.Drawing.Point(179, 645);
+            this.SampleRateBox.Location = new System.Drawing.Point(179, 697);
             this.SampleRateBox.Name = "SampleRateBox";
             this.SampleRateBox.Size = new System.Drawing.Size(136, 20);
             this.SampleRateBox.TabIndex = 5;
@@ -245,7 +249,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(13, 649);
+            this.label2.Location = new System.Drawing.Point(13, 701);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 6;
@@ -299,17 +303,18 @@
             chartArea3.AxisX.MajorTickMark.Enabled = false;
             chartArea3.AxisX.MinorGrid.Enabled = true;
             chartArea3.AxisX.MinorGrid.LineColor = System.Drawing.Color.Silver;
-            chartArea3.AxisX.Title = "Frequency Spectrum in Seconds";
+            chartArea3.AxisX.Title = "Error Period (Seconds/Cycle)";
             chartArea3.AxisY.MajorGrid.Interval = 0D;
             chartArea3.AxisY.MajorGrid.IntervalOffset = 0D;
             chartArea3.AxisY.MajorGrid.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Auto;
             chartArea3.AxisY.MajorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea3.AxisY.Title = "Energy (arcsec)";
             chartArea3.Name = "ChartArea1";
             this.chart3.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
-            legend3.Title = "Seeing Dominated Range";
+            legend3.Title = "Periodicity\\n\\nSeeing Dominated Range";
             this.chart3.Legends.Add(legend3);
-            this.chart3.Location = new System.Drawing.Point(16, 462);
+            this.chart3.Location = new System.Drawing.Point(16, 514);
             this.chart3.Name = "chart3";
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastPoint;
@@ -342,7 +347,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(12, 674);
+            this.label7.Location = new System.Drawing.Point(12, 726);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(150, 13);
             this.label7.TabIndex = 17;
@@ -350,7 +355,7 @@
             // 
             // ImageScaleBox
             // 
-            this.ImageScaleBox.Location = new System.Drawing.Point(179, 671);
+            this.ImageScaleBox.Location = new System.Drawing.Point(179, 723);
             this.ImageScaleBox.Name = "ImageScaleBox";
             this.ImageScaleBox.Size = new System.Drawing.Size(136, 20);
             this.ImageScaleBox.TabIndex = 16;
@@ -383,7 +388,7 @@
             this.MountControlGroup.Controls.Add(this.label4);
             this.MountControlGroup.Controls.Add(this.label5);
             this.MountControlGroup.ForeColor = System.Drawing.Color.White;
-            this.MountControlGroup.Location = new System.Drawing.Point(12, 768);
+            this.MountControlGroup.Location = new System.Drawing.Point(12, 820);
             this.MountControlGroup.Name = "MountControlGroup";
             this.MountControlGroup.Size = new System.Drawing.Size(309, 103);
             this.MountControlGroup.TabIndex = 20;
@@ -403,7 +408,7 @@
             this.groupBox1.Controls.Add(this.AOSlewRateBox);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(331, 645);
+            this.groupBox1.Location = new System.Drawing.Point(331, 697);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(169, 226);
             this.groupBox1.TabIndex = 21;
@@ -506,7 +511,7 @@
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupBox2.Location = new System.Drawing.Point(506, 645);
+            this.groupBox2.Location = new System.Drawing.Point(506, 697);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(740, 226);
             this.groupBox2.TabIndex = 22;
@@ -589,6 +594,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.AvgDriftTextBox);
+            this.groupBox4.Controls.Add(this.label40);
             this.groupBox4.Controls.Add(this.MDRBox);
             this.groupBox4.Controls.Add(this.label20);
             this.groupBox4.Controls.Add(this.label37);
@@ -605,6 +612,24 @@
             this.groupBox4.TabIndex = 29;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Error Statistics";
+            // 
+            // AvgDriftTextBox
+            // 
+            this.AvgDriftTextBox.Location = new System.Drawing.Point(135, 131);
+            this.AvgDriftTextBox.Name = "AvgDriftTextBox";
+            this.AvgDriftTextBox.Size = new System.Drawing.Size(107, 20);
+            this.AvgDriftTextBox.TabIndex = 33;
+            this.AvgDriftTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.ForeColor = System.Drawing.Color.White;
+            this.label40.Location = new System.Drawing.Point(6, 134);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(127, 13);
+            this.label40.TabIndex = 32;
+            this.label40.Text = "Drift X/Y/Total (arc\"/min)";
             // 
             // MDRBox
             // 
@@ -1012,9 +1037,9 @@
             chartArea4.AxisY.MajorGrid.Enabled = false;
             chartArea4.Name = "CalibrationChart";
             this.chart4.ChartAreas.Add(chartArea4);
-            this.chart4.Location = new System.Drawing.Point(1101, 167);
+            this.chart4.Location = new System.Drawing.Point(1121, 187);
             this.chart4.Name = "chart4";
-            this.chart4.Size = new System.Drawing.Size(95, 98);
+            this.chart4.Size = new System.Drawing.Size(95, 95);
             this.chart4.TabIndex = 50;
             this.chart4.Text = "chart4";
             // 
@@ -1023,7 +1048,7 @@
             this.CalibrationGraphLabel.AutoSize = true;
             this.CalibrationGraphLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CalibrationGraphLabel.ForeColor = System.Drawing.Color.Brown;
-            this.CalibrationGraphLabel.Location = new System.Drawing.Point(1125, 265);
+            this.CalibrationGraphLabel.Location = new System.Drawing.Point(1140, 295);
             this.CalibrationGraphLabel.Name = "CalibrationGraphLabel";
             this.CalibrationGraphLabel.Size = new System.Drawing.Size(56, 13);
             this.CalibrationGraphLabel.TabIndex = 51;
@@ -1035,7 +1060,7 @@
             this.label35.AutoSize = true;
             this.label35.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label35.ForeColor = System.Drawing.Color.Black;
-            this.label35.Location = new System.Drawing.Point(1087, 210);
+            this.label35.Location = new System.Drawing.Point(1101, 230);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(25, 13);
             this.label35.TabIndex = 52;
@@ -1047,7 +1072,7 @@
             this.label36.AutoSize = true;
             this.label36.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label36.ForeColor = System.Drawing.Color.Black;
-            this.label36.Location = new System.Drawing.Point(1188, 210);
+            this.label36.Location = new System.Drawing.Point(1202, 230);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(19, 13);
             this.label36.TabIndex = 53;
@@ -1072,7 +1097,7 @@
             // 
             this.label38.AutoSize = true;
             this.label38.ForeColor = System.Drawing.Color.White;
-            this.label38.Location = new System.Drawing.Point(14, 701);
+            this.label38.Location = new System.Drawing.Point(14, 753);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(68, 13);
             this.label38.TabIndex = 56;
@@ -1080,7 +1105,7 @@
             // 
             // PEIndexTextBox
             // 
-            this.PEIndexTextBox.Location = new System.Drawing.Point(179, 698);
+            this.PEIndexTextBox.Location = new System.Drawing.Point(179, 750);
             this.PEIndexTextBox.Name = "PEIndexTextBox";
             this.PEIndexTextBox.Size = new System.Drawing.Size(45, 20);
             this.PEIndexTextBox.TabIndex = 55;
@@ -1103,7 +1128,7 @@
             // 
             this.label39.AutoSize = true;
             this.label39.ForeColor = System.Drawing.Color.White;
-            this.label39.Location = new System.Drawing.Point(14, 730);
+            this.label39.Location = new System.Drawing.Point(14, 782);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(84, 13);
             this.label39.TabIndex = 58;
@@ -1111,7 +1136,7 @@
             // 
             // SaturatedTextBox
             // 
-            this.SaturatedTextBox.Location = new System.Drawing.Point(179, 727);
+            this.SaturatedTextBox.Location = new System.Drawing.Point(179, 779);
             this.SaturatedTextBox.Name = "SaturatedTextBox";
             this.SaturatedTextBox.Size = new System.Drawing.Size(132, 20);
             this.SaturatedTextBox.TabIndex = 59;
@@ -1121,18 +1146,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.ClientSize = new System.Drawing.Size(1258, 879);
+            this.BackColor = System.Drawing.Color.DarkCyan;
+            this.ClientSize = new System.Drawing.Size(1258, 934);
+            this.Controls.Add(this.label36);
+            this.Controls.Add(this.label35);
+            this.Controls.Add(this.CalibrationGraphLabel);
+            this.Controls.Add(this.chart4);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.SaturatedTextBox);
             this.Controls.Add(this.label39);
             this.Controls.Add(this.RemoveDriftCheckBox);
             this.Controls.Add(this.label38);
             this.Controls.Add(this.PEIndexTextBox);
             this.Controls.Add(this.HelpButton);
-            this.Controls.Add(this.label36);
-            this.Controls.Add(this.label35);
-            this.Controls.Add(this.CalibrationGraphLabel);
-            this.Controls.Add(this.chart4);
             this.Controls.Add(this.PrintButton);
             this.Controls.Add(this.label33);
             this.Controls.Add(this.BinningBox);
@@ -1167,7 +1193,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.SampleRateBox);
             this.Controls.Add(this.chart2);
-            this.Controls.Add(this.chart1);
             this.Controls.Add(this.GuideLogFilePathBrowse);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.GuideLogFilePath);
@@ -1288,6 +1313,8 @@
         private System.Windows.Forms.CheckBox RemoveDriftCheckBox;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.TextBox SaturatedTextBox;
+        private System.Windows.Forms.TextBox AvgDriftTextBox;
+        private System.Windows.Forms.Label label40;
     }
 }
 

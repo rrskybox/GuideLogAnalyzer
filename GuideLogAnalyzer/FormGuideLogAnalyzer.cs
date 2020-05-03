@@ -105,6 +105,10 @@ namespace GuideLogAnalyzer
             double scaleX = 1 / binX;
             double scaleY = 1 / binY;
 
+            double xSlope = 0;
+            double ySlope = 0;
+            double tSlope = 0;
+
             string scaleXString = xH.Detail("ImageScaleXatbinning" + binX.ToString("0"));
             string scaleYString = xH.Detail("ImageScaleYatbinning" + binY.ToString("0"));
             if (scaleXString != "NA")
@@ -161,9 +165,9 @@ namespace GuideLogAnalyzer
 
             if (RemoveDriftCheckBox.Checked)
             {
-                Analysis.RemoveOffsetAndSlope(ref errorValsTdbl);
-                Analysis.RemoveOffsetAndSlope(ref errorValsXdbl);
-                Analysis.RemoveOffsetAndSlope(ref errorValsYdbl);
+                tSlope = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl);
+                xSlope = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl);
+                ySlope = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl);
             }
 
             for (int i = 0; i < vLen; i++)
@@ -172,6 +176,7 @@ namespace GuideLogAnalyzer
                 errorValsXcplx[i] = new Complex(errorValsXdbl[i], 0);
                 errorValsYcplx[i] = new Complex(errorValsYdbl[i], 0);
             }
+
 
             for (int i = 0; i < vLen; i++)
             {
@@ -435,7 +440,7 @@ namespace GuideLogAnalyzer
             Show();
 
             double[] RMSStats = Analysis.RMSError(errorValsXdbl, errorValsYdbl, errorValsTdbl);
-            ErrorRMSBox.Text = RMSStats[0].ToString("0.00") + " / " + RMSStats[1].ToString("0.00") + " / " + RMSStats[2].ToString("0.00");
+            ErrorRMSBox.Text = RMSStats[0].ToString("0.0") + " / " + RMSStats[1].ToString("0.0") + " / " + RMSStats[2].ToString("0.0");
             Show();
 
             double[] mdrStats = Analysis.MDRStats(errorValsXcplx, errorValsYcplx, errorValsTcplx, FFTSampleRate);
@@ -445,6 +450,9 @@ namespace GuideLogAnalyzer
             double[] FreqMedStats = Analysis.FrequencyMedian(errorFreq);
             double iToF = FFTSampleRate / FFTLen;
             FrequencyBalanceBox.Text = (1 / (iToF * FreqMedStats[0])).ToString("0") + " sec / " + (1 / (iToF * FreqMedStats[1])).ToString("0") + " sec";
+
+            AvgDriftTextBox.Text = (xSlope * 60.0 / FFTTimeIncrement).ToString("0.0") + " / " + (ySlope * 60.0 / FFTTimeIncrement).ToString("0.0") + " / " + (tSlope * 60.0 / FFTTimeIncrement).ToString("0.0");
+
 
             Show();
         }
