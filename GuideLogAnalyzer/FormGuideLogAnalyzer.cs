@@ -102,8 +102,8 @@ namespace GuideLogAnalyzer
             MoveBox.Text = xH.Detail(xH.MinimumMove) + " (sec) / " + xH.Detail(xH.MaximumMove) + " (sec)";
             int binX = Convert.ToInt16(xH.Detail("BinX"));
             int binY = Convert.ToInt16(xH.Detail("BinY"));
-            double scaleX = 1 / binX;
-            double scaleY = 1 / binY;
+            double scaleX = 1.0 / (double)binX;
+            double scaleY = 1.0 / (double)binY;
 
             double xSlope = 0;
             double ySlope = 0;
