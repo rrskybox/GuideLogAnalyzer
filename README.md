@@ -52,7 +52,7 @@ Guide Log Analyzer is a Windows Forms executable, written in C#.  Guider Log fil
 
 Installation:  
 
-Download the "publish" directory. Run the "Setup" application.  Upon completion, an application icon will have been added to the start menu under "TSXToolKit" with the name "Guide Log Analyzer".  This application can be pinned to the Start if desired.
+Download GuideLogAnalyzer.zip to your local drive from the publish directory.  Extract all contents to a default directory (e.g. GuideLogAnalyzer).  Launch setup.exe from that directory.  Upon completion, an application icon will have been added to the start menu under "TSXToolKit" with the name "Guide Log Analyzer".  This application can be pinned to the Start if desired.
 
 Support:  
 
