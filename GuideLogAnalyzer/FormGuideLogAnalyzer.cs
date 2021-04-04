@@ -38,6 +38,8 @@ namespace GuideLogAnalyzer
         public Series cGraphPX;
         public Series cGraphPY;
 
+        private double enteredImageScale = 1;
+
         public FormGuideLogAnalyzer()
         {
             InitializeComponent();
@@ -100,6 +102,10 @@ namespace GuideLogAnalyzer
                                       " / " +
                                       xH.Detail(xH.AggressivenessFactorYMinus);
             MoveBox.Text = xH.Detail(xH.MinimumMove) + " (sec) / " + xH.Detail(xH.MaximumMove) + " (sec)";
+
+            //if (Convert.ToInt16(xH.Detail("BinX") != 0) int binY = Convert.ToInt16(xH.Detail("BinY"));
+            // int binX = if (Convert.ToInt16(xH.Detail("BinX"));
+            //int binY = Convert.ToInt16(xH.Detail("BinY"));
             int binX = Convert.ToInt16(xH.Detail("BinX"));
             int binY = Convert.ToInt16(xH.Detail("BinY"));
             double scaleX = 1.0 / (double)binX;
@@ -111,10 +117,10 @@ namespace GuideLogAnalyzer
 
             string scaleXString = xH.Detail("ImageScaleXatbinning" + binX.ToString("0"));
             string scaleYString = xH.Detail("ImageScaleYatbinning" + binY.ToString("0"));
-            if (scaleXString != "NA")
-            { scaleX = Convert.ToDouble(scaleXString); }
-            if (scaleYString != "NA")
-            { scaleY = Convert.ToDouble(scaleYString); }
+
+            if (scaleXString.Contains("NA")) scaleX = enteredImageScale;
+            if (scaleYString.Contains("NA")) scaleY = enteredImageScale;
+            else scaleY = enteredImageScale;
 
             //scaleT = Math.Sqrt(Math.Pow(scaleX, 2) + Math.Pow(scaleY, 2));
             double scaleT = scaleX;
@@ -313,6 +319,8 @@ namespace GuideLogAnalyzer
                 double harmonic4 = harmonic0 / 5;
                 double harmonic5 = harmonic0 / 6;
                 double harmonic6 = harmonic0 / 7;
+                double harmonic7 = harmonic0 / 8;
+
 
                 VerticalLineAnnotation VA0 = new VerticalLineAnnotation
                 {
@@ -392,6 +400,18 @@ namespace GuideLogAnalyzer
                     X = harmonic6
                 };
 
+                VerticalLineAnnotation VA7 = new VerticalLineAnnotation
+                {
+                    AxisX = CA.AxisX,
+                    AllowMoving = false,
+                    IsInfinitive = true,
+                    ClipToChartArea = CA.Name,
+                    Name = "myLine7",
+                    LineColor = Color.DarkOrange,
+                    LineWidth = 2,         // use your numbers!
+                    X = harmonic7
+                };
+
                 chart2.Annotations.Add(VA0);
                 chart2.Annotations.Add(VA1);
                 chart2.Annotations.Add(VA2);
@@ -399,6 +419,8 @@ namespace GuideLogAnalyzer
                 chart2.Annotations.Add(VA4);
                 chart2.Annotations.Add(VA5);
                 chart2.Annotations.Add(VA6);
+                chart2.Annotations.Add(VA7);
+
             }
 
             Show();
@@ -605,6 +627,18 @@ namespace GuideLogAnalyzer
         {
             CompileForm();
             return;
+        }
+
+        private void ImageScaleBox_TextChanged(object sender, EventArgs e)
+        {
+            //Convert decimal entry to image scale
+            try
+            {
+                enteredImageScale = Convert.ToDouble(ImageScaleBox.Text);
+                CompileForm();
+            }
+            catch { return; } //do nothing if it won't convert cleanly
+                              //otherwise, update the image scale values
         }
     }
 }

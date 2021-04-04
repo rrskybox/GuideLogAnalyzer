@@ -360,6 +360,7 @@
             this.ImageScaleBox.Size = new System.Drawing.Size(136, 20);
             this.ImageScaleBox.TabIndex = 16;
             this.ImageScaleBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ImageScaleBox.TextChanged += new System.EventHandler(this.ImageScaleBox_TextChanged);
             // 
             // label8
             // 
