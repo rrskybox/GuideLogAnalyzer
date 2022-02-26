@@ -171,9 +171,16 @@ namespace GuideLogAnalyzer
 
             if (RemoveDriftCheckBox.Checked)
             {
-                tSlope = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl);
-                xSlope = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl);
-                ySlope = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl);
+                tSlope = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl,false);
+                xSlope = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl,false);
+                ySlope = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl,false);
+            }
+            else
+            {
+                tSlope = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl, true); //Slope only
+                xSlope = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl, true); //Slope only
+                ySlope = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl, true); //Slope only
+
             }
 
             for (int i = 0; i < vLen; i++)
