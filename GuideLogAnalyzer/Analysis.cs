@@ -200,7 +200,7 @@ namespace GuideLogAnalyzer
             return (meanFreqs);
         }
 
-        public static double RemoveOffsetAndSlope(ref double[] tData)
+        public static double RemoveOffsetAndSlope(ref double[] tData, bool slopeOnly)
         {
             int dCount = tData.Length;
             double sumXsquared = 0;
@@ -229,10 +229,11 @@ namespace GuideLogAnalyzer
             double slope = ((dCount * sumXY) - (sumX * sumY)) / ((dCount * sumXsquared) - Math.Pow(sumX, 2));
             double offset = (sumY - (slope * sumX)) / dCount;
 
-            for (int i = 0; i < dCount; i++)
-            {
-                tData[i] = tData[i] - (slope * i) - offset;
-            }
+            if (!slopeOnly)
+                for (int i = 0; i < dCount; i++)
+                {
+                    tData[i] = tData[i] - (slope * i) - offset;
+                }
             return slope;
 
         }

@@ -108,8 +108,10 @@ namespace GuideLogAnalyzer
             //int binY = Convert.ToInt16(xH.Detail("BinY"));
             int binX = Convert.ToInt16(xH.Detail("BinX"));
             int binY = Convert.ToInt16(xH.Detail("BinY"));
-            double scaleX = 1.0 / (double)binX;
-            double scaleY = 1.0 / (double)binY;
+
+            double scaleX; // = 1.0 / (double)binX;
+            double scaleY; // = 1.0 / (double)binY;
+            double scaleT;
 
             double xSlope = 0;
             double ySlope = 0;
@@ -119,11 +121,12 @@ namespace GuideLogAnalyzer
             string scaleYString = xH.Detail("ImageScaleYatbinning" + binY.ToString("0"));
 
             if (scaleXString.Contains("NA")) scaleX = enteredImageScale;
+            else scaleX = Convert.ToDouble(scaleXString);
             if (scaleYString.Contains("NA")) scaleY = enteredImageScale;
-            else scaleY = enteredImageScale;
+            else scaleY = Convert.ToDouble(scaleYString);
 
-            //scaleT = Math.Sqrt(Math.Pow(scaleX, 2) + Math.Pow(scaleY, 2));
-            double scaleT = scaleX;
+            scaleT = Math.Sqrt(Math.Pow(scaleX, 2) + Math.Pow(scaleY, 2));
+            //double scaleT = scaleX;
             ImageScaleBox.Text = scaleXString + " / " + scaleYString;
 
             AOAggressivenessBox.Text = xH.Detail(xH.AOAggressiveness);
@@ -171,9 +174,16 @@ namespace GuideLogAnalyzer
 
             if (RemoveDriftCheckBox.Checked)
             {
-                tSlope = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl);
-                xSlope = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl);
-                ySlope = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl);
+                tSlope = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl,false);
+                xSlope = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl,false);
+                ySlope = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl,false);
+            }
+            else
+            {
+                tSlope = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl, true); //Slope only
+                xSlope = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl, true); //Slope only
+                ySlope = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl, true); //Slope only
+
             }
 
             for (int i = 0; i < vLen; i++)
