@@ -159,6 +159,7 @@ namespace GuideLogAnalyzer
                 }
                 scanLine = logDataFile.ReadLine();
             }
+            logDataFile.Close();
             return;
         }
 

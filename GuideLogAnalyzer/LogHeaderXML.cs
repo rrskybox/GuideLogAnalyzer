@@ -58,6 +58,7 @@ namespace GuideLogAnalyzer
                     }
                 }
             } while (ldocTxt != null);
+            logDataFile.Close();
             return;
         }
 
