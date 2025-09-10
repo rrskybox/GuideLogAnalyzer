@@ -28,8 +28,8 @@
     <SuiteName>TSXToolkit</SuiteName>
     <WebPage>publish.html</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>65</ApplicationRevision>
-    <ApplicationVersion>1.9.0.%2a</ApplicationVersion>
+    <ApplicationRevision>67</ApplicationRevision>
+    <ApplicationVersion>1.10.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -121,6 +121,9 @@
     </Compile>
     <None Include="GuideLogAnalyzerDescription.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GuideLogAnalyzerDescription.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="GuideLogAnalyzer_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">

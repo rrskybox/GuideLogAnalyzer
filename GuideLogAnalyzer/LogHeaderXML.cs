@@ -132,5 +132,9 @@ namespace GuideLogAnalyzer
         public string AOTrackBoxSize = "AOTrackBoxSize";
         public string Autoguide = "Autoguide";
 
+        public string CalibrationBTP= "Beyondthepolecal";
+        public string CurrentBTP = "Beyondthepole";
+        public string BeforePEC = "BeforePEC";
+
     }
 }

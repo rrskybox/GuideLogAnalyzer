@@ -84,6 +84,13 @@ namespace GuideLogAnalyzer
             CalPABox.Text = (xH.Detail(xH.Calibrationpositionangle));
             CurrentPABox.Text = (xH.Detail(xH.Positionanglenow));
 
+            CalibrationBTPBox.Text = xH.Detail(xH.CalibrationBTP) != "N/A" ? xH.Detail(xH.CalibrationBTP) : "N/A";
+            CalibrationBTPBox.Text = CalibrationBTPBox.Text == "0" ? "No" : "Yes";
+            CurrentBTPBox.Text = xH.Detail(xH.CurrentBTP) != "N/A" ? xH.Detail(xH.CurrentBTP) : "N/A";
+            CurrentBTPBox.Text = CurrentBTPBox.Text == "0" ? "No" : "Yes";
+            BeforePECBox.Text = xH.Detail(xH.BeforePEC) != "N/A" ? xH.Detail(xH.BeforePEC) : "N/A";
+            BeforePECBox.Text = BeforePECBox.Text== "1"? "No": "Yes";
+
             AxisControlBox.Text = xH.Detail(xH.XPlusAxis) +
                                         " / " +
                                         xH.Detail(xH.XMinusAxis) +

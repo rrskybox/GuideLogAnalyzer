@@ -132,6 +132,12 @@
             this.RemoveDriftCheckBox = new System.Windows.Forms.CheckBox();
             this.label39 = new System.Windows.Forms.Label();
             this.SaturatedTextBox = new System.Windows.Forms.TextBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.CalibrationBTPBox = new System.Windows.Forms.TextBox();
+            this.CurrentBTPBox = new System.Windows.Forms.TextBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.BeforePECBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
@@ -169,7 +175,7 @@
             this.GuideLogFilePathBrowse.ForeColor = System.Drawing.Color.Black;
             this.GuideLogFilePathBrowse.Location = new System.Drawing.Point(931, 10);
             this.GuideLogFilePathBrowse.Name = "GuideLogFilePathBrowse";
-            this.GuideLogFilePathBrowse.Size = new System.Drawing.Size(75, 23);
+            this.GuideLogFilePathBrowse.Size = new System.Drawing.Size(61, 23);
             this.GuideLogFilePathBrowse.TabIndex = 2;
             this.GuideLogFilePathBrowse.Text = "Browse";
             this.GuideLogFilePathBrowse.UseVisualStyleBackColor = true;
@@ -201,7 +207,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1231, 233);
+            this.chart1.Size = new System.Drawing.Size(1230, 233);
             this.chart1.TabIndex = 3;
             this.chart1.Text = "chart1";
             // 
@@ -873,7 +879,7 @@
             // 
             this.label29.AutoSize = true;
             this.label29.ForeColor = System.Drawing.Color.White;
-            this.label29.Location = new System.Drawing.Point(706, 46);
+            this.label29.Location = new System.Drawing.Point(699, 46);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(79, 13);
             this.label29.TabIndex = 34;
@@ -881,9 +887,9 @@
             // 
             // CalDecBox
             // 
-            this.CalDecBox.Location = new System.Drawing.Point(791, 42);
+            this.CalDecBox.Location = new System.Drawing.Point(781, 42);
             this.CalDecBox.Name = "CalDecBox";
-            this.CalDecBox.Size = new System.Drawing.Size(65, 20);
+            this.CalDecBox.Size = new System.Drawing.Size(57, 20);
             this.CalDecBox.TabIndex = 33;
             this.CalDecBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -891,7 +897,7 @@
             // 
             this.label30.AutoSize = true;
             this.label30.ForeColor = System.Drawing.Color.White;
-            this.label30.Location = new System.Drawing.Point(706, 72);
+            this.label30.Location = new System.Drawing.Point(699, 72);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(64, 13);
             this.label30.TabIndex = 36;
@@ -899,9 +905,9 @@
             // 
             // CurrentDecBox
             // 
-            this.CurrentDecBox.Location = new System.Drawing.Point(791, 68);
+            this.CurrentDecBox.Location = new System.Drawing.Point(781, 68);
             this.CurrentDecBox.Name = "CurrentDecBox";
-            this.CurrentDecBox.Size = new System.Drawing.Size(65, 20);
+            this.CurrentDecBox.Size = new System.Drawing.Size(57, 20);
             this.CurrentDecBox.TabIndex = 35;
             this.CurrentDecBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -909,7 +915,7 @@
             // 
             this.label31.AutoSize = true;
             this.label31.ForeColor = System.Drawing.Color.White;
-            this.label31.Location = new System.Drawing.Point(862, 47);
+            this.label31.Location = new System.Drawing.Point(852, 47);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(73, 13);
             this.label31.TabIndex = 38;
@@ -917,9 +923,9 @@
             // 
             // CalPABox
             // 
-            this.CalPABox.Location = new System.Drawing.Point(941, 43);
+            this.CalPABox.Location = new System.Drawing.Point(927, 43);
             this.CalPABox.Name = "CalPABox";
-            this.CalPABox.Size = new System.Drawing.Size(65, 20);
+            this.CalPABox.Size = new System.Drawing.Size(57, 20);
             this.CalPABox.TabIndex = 37;
             this.CalPABox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -927,7 +933,7 @@
             // 
             this.label32.AutoSize = true;
             this.label32.ForeColor = System.Drawing.Color.White;
-            this.label32.Location = new System.Drawing.Point(862, 72);
+            this.label32.Location = new System.Drawing.Point(852, 72);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(58, 13);
             this.label32.TabIndex = 40;
@@ -935,9 +941,9 @@
             // 
             // CurrentPABox
             // 
-            this.CurrentPABox.Location = new System.Drawing.Point(941, 68);
+            this.CurrentPABox.Location = new System.Drawing.Point(927, 68);
             this.CurrentPABox.Name = "CurrentPABox";
-            this.CurrentPABox.Size = new System.Drawing.Size(65, 20);
+            this.CurrentPABox.Size = new System.Drawing.Size(57, 20);
             this.CurrentPABox.TabIndex = 39;
             this.CurrentPABox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -947,9 +953,9 @@
             this.AboutButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
             this.AboutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AboutButton.ForeColor = System.Drawing.Color.Black;
-            this.AboutButton.Location = new System.Drawing.Point(1171, 39);
+            this.AboutButton.Location = new System.Drawing.Point(1181, 39);
             this.AboutButton.Name = "AboutButton";
-            this.AboutButton.Size = new System.Drawing.Size(75, 23);
+            this.AboutButton.Size = new System.Drawing.Size(68, 23);
             this.AboutButton.TabIndex = 41;
             this.AboutButton.Text = "About";
             this.AboutButton.UseVisualStyleBackColor = true;
@@ -961,9 +967,9 @@
             this.CloseButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
             this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseButton.ForeColor = System.Drawing.Color.Black;
-            this.CloseButton.Location = new System.Drawing.Point(1171, 68);
+            this.CloseButton.Location = new System.Drawing.Point(1181, 68);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(75, 23);
+            this.CloseButton.Size = new System.Drawing.Size(68, 23);
             this.CloseButton.TabIndex = 42;
             this.CloseButton.Text = "Close";
             this.CloseButton.UseVisualStyleBackColor = true;
@@ -973,7 +979,7 @@
             // 
             this.label33.AutoSize = true;
             this.label33.ForeColor = System.Drawing.Color.White;
-            this.label33.Location = new System.Drawing.Point(553, 73);
+            this.label33.Location = new System.Drawing.Point(546, 73);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(76, 13);
             this.label33.TabIndex = 47;
@@ -981,9 +987,9 @@
             // 
             // BinningBox
             // 
-            this.BinningBox.Location = new System.Drawing.Point(635, 68);
+            this.BinningBox.Location = new System.Drawing.Point(628, 68);
             this.BinningBox.Name = "BinningBox";
-            this.BinningBox.Size = new System.Drawing.Size(65, 20);
+            this.BinningBox.Size = new System.Drawing.Size(57, 20);
             this.BinningBox.TabIndex = 46;
             this.BinningBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -991,7 +997,7 @@
             // 
             this.label34.AutoSize = true;
             this.label34.ForeColor = System.Drawing.Color.White;
-            this.label34.Location = new System.Drawing.Point(553, 47);
+            this.label34.Location = new System.Drawing.Point(546, 47);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(77, 13);
             this.label34.TabIndex = 45;
@@ -999,9 +1005,9 @@
             // 
             // ExposureBox
             // 
-            this.ExposureBox.Location = new System.Drawing.Point(635, 42);
+            this.ExposureBox.Location = new System.Drawing.Point(628, 42);
             this.ExposureBox.Name = "ExposureBox";
-            this.ExposureBox.Size = new System.Drawing.Size(65, 20);
+            this.ExposureBox.Size = new System.Drawing.Size(57, 20);
             this.ExposureBox.TabIndex = 44;
             this.ExposureBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1011,9 +1017,9 @@
             this.PrintButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
             this.PrintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PrintButton.ForeColor = System.Drawing.Color.Black;
-            this.PrintButton.Location = new System.Drawing.Point(1090, 39);
+            this.PrintButton.Location = new System.Drawing.Point(1114, 10);
             this.PrintButton.Name = "PrintButton";
-            this.PrintButton.Size = new System.Drawing.Size(75, 23);
+            this.PrintButton.Size = new System.Drawing.Size(61, 23);
             this.PrintButton.TabIndex = 48;
             this.PrintButton.Text = "Print";
             this.PrintButton.UseVisualStyleBackColor = true;
@@ -1086,9 +1092,9 @@
             this.HelpButton.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
             this.HelpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.HelpButton.ForeColor = System.Drawing.Color.Black;
-            this.HelpButton.Location = new System.Drawing.Point(1171, 9);
+            this.HelpButton.Location = new System.Drawing.Point(1181, 9);
             this.HelpButton.Name = "HelpButton";
-            this.HelpButton.Size = new System.Drawing.Size(75, 23);
+            this.HelpButton.Size = new System.Drawing.Size(68, 23);
             this.HelpButton.TabIndex = 54;
             this.HelpButton.Text = "Help";
             this.HelpButton.UseVisualStyleBackColor = true;
@@ -1143,12 +1149,72 @@
             this.SaturatedTextBox.TabIndex = 59;
             this.SaturatedTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.ForeColor = System.Drawing.Color.White;
+            this.label41.Location = new System.Drawing.Point(995, 47);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(80, 13);
+            this.label41.TabIndex = 60;
+            this.label41.Text = "Calibration BTP";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.ForeColor = System.Drawing.Color.White;
+            this.label42.Location = new System.Drawing.Point(995, 71);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(65, 13);
+            this.label42.TabIndex = 61;
+            this.label42.Text = "Current BTP";
+            // 
+            // CalibrationBTPBox
+            // 
+            this.CalibrationBTPBox.Location = new System.Drawing.Point(1081, 42);
+            this.CalibrationBTPBox.Name = "CalibrationBTPBox";
+            this.CalibrationBTPBox.Size = new System.Drawing.Size(31, 20);
+            this.CalibrationBTPBox.TabIndex = 62;
+            this.CalibrationBTPBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // CurrentBTPBox
+            // 
+            this.CurrentBTPBox.Location = new System.Drawing.Point(1081, 69);
+            this.CurrentBTPBox.Name = "CurrentBTPBox";
+            this.CurrentBTPBox.Size = new System.Drawing.Size(31, 20);
+            this.CurrentBTPBox.TabIndex = 63;
+            this.CurrentBTPBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.ForeColor = System.Drawing.Color.White;
+            this.label43.Location = new System.Drawing.Point(1133, 47);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(28, 13);
+            this.label43.TabIndex = 64;
+            this.label43.Text = "PEC\r\n";
+            // 
+            // BeforePECBox
+            // 
+            this.BeforePECBox.Location = new System.Drawing.Point(1130, 68);
+            this.BeforePECBox.Name = "BeforePECBox";
+            this.BeforePECBox.Size = new System.Drawing.Size(31, 20);
+            this.BeforePECBox.TabIndex = 65;
+            this.BeforePECBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // FormGuideLogAnalyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(1258, 934);
+            this.Controls.Add(this.BeforePECBox);
+            this.Controls.Add(this.label43);
+            this.Controls.Add(this.CurrentBTPBox);
+            this.Controls.Add(this.CalibrationBTPBox);
+            this.Controls.Add(this.label42);
+            this.Controls.Add(this.label41);
             this.Controls.Add(this.label36);
             this.Controls.Add(this.label35);
             this.Controls.Add(this.CalibrationGraphLabel);
@@ -1316,6 +1382,12 @@
         private System.Windows.Forms.TextBox SaturatedTextBox;
         private System.Windows.Forms.TextBox AvgDriftTextBox;
         private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.TextBox CalibrationBTPBox;
+        private System.Windows.Forms.TextBox CurrentBTPBox;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.TextBox BeforePECBox;
     }
 }
 
