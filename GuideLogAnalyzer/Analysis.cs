@@ -234,6 +234,12 @@ namespace GuideLogAnalyzer
                 {
                     tData[i] = tData[i] - (slope * i) - offset;
                 }
+            else
+                for (int i = 0; i < dCount; i++)
+                {
+                    tData[i] = tData[i] - (slope * i);
+                }
+            
             return slope;
 
         }

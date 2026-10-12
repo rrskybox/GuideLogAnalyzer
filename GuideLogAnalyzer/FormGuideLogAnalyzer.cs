@@ -26,6 +26,9 @@ namespace GuideLogAnalyzer
 {
     public partial class FormGuideLogAnalyzer : Form
     {
+        public Series cGraphX;   //Centroid X
+        public Series cGraphY;   //Centroid Y
+
         public Series tGraphT;
         public Series tGraphX;
         public Series tGraphY;
@@ -110,9 +113,6 @@ namespace GuideLogAnalyzer
                                       xH.Detail(xH.AggressivenessFactorYMinus);
             MoveBox.Text = xH.Detail(xH.MinimumMove) + " (sec) / " + xH.Detail(xH.MaximumMove) + " (sec)";
 
-            //if (Convert.ToInt16(xH.Detail("BinX") != 0) int binY = Convert.ToInt16(xH.Detail("BinY"));
-            // int binX = if (Convert.ToInt16(xH.Detail("BinX"));
-            //int binY = Convert.ToInt16(xH.Detail("BinY"));
             int binX = Convert.ToInt16(xH.Detail("BinX"));
             int binY = Convert.ToInt16(xH.Detail("BinY"));
 
@@ -123,6 +123,9 @@ namespace GuideLogAnalyzer
             double xSlope = 0;
             double ySlope = 0;
             double tSlope = 0;
+
+            double cxSlope = 0;
+            double cySlope = 0;
 
             string scaleXString = xH.Detail("ImageScaleXatbinning" + binX.ToString("0"));
             string scaleYString = xH.Detail("ImageScaleYatbinning" + binY.ToString("0"));
@@ -149,6 +152,9 @@ namespace GuideLogAnalyzer
             Complex[] errorValsTcplx = new Complex[vLen];
             Complex[] errorValsXcplx = new Complex[vLen];
             Complex[] errorValsYcplx = new Complex[vLen];
+            double[] centroidValsXdbl = new double[vLen];
+            double[] centroidValsYdbl = new double[vLen];
+
             double[] errorValsTdbl = new double[vLen];
             double[] errorValsXdbl = new double[vLen];
             double[] errorValsYdbl = new double[vLen];
@@ -166,6 +172,10 @@ namespace GuideLogAnalyzer
             //time domain plot of log data, total, X and Y, mean, and guidestarsignal
             for (int i = 0; i < vLen; i++)
             {
+
+                centroidValsXdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.RefCentroidX);
+                centroidValsYdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.RefCentroidY);
+
                 errorValsTdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.TotGuideErr) * scaleT;
                 errorValsXdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideErrX) * scaleX;
                 errorValsYdbl[i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideErrY) * scaleY;
@@ -184,12 +194,16 @@ namespace GuideLogAnalyzer
                 tSlope = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl,false);
                 xSlope = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl,false);
                 ySlope = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl,false);
+                cxSlope = Analysis.RemoveOffsetAndSlope(ref centroidValsXdbl, false);   
+                cySlope = Analysis.RemoveOffsetAndSlope(ref centroidValsYdbl, false);
             }
             else
             {
                 tSlope = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl, true); //Slope only
                 xSlope = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl, true); //Slope only
                 ySlope = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl, true); //Slope only
+                cxSlope = Analysis.RemoveOffsetAndSlope(ref centroidValsXdbl, true); //Slope only
+                cySlope = Analysis.RemoveOffsetAndSlope(ref centroidValsYdbl, true); //Slope only
 
             }
 
@@ -217,6 +231,7 @@ namespace GuideLogAnalyzer
             tGraphY.Color = Color.Green;
 
             Show();
+
             //Determine if wormIndex data is present and post results
             double pesum = 0;
             for (int i = 0; i < vLen; i++) { pesum += (wormIndexDec[i] + wormIndexRA[i]); }
@@ -243,10 +258,6 @@ namespace GuideLogAnalyzer
 
             for (int i = 1; i < (FFTLen / 2); i++)
             {
-                //fGraph.Points.Add(XPlusVals[i].Real);
-                //FFTmagT = Math.Pow(errorValsTcplx[i].Real, 2) + Math.Pow(errorValsTcplx[i].Imaginary, 2);
-                //FFTmagX = Math.Pow(errorValsXcplx[i].Real, 2) + Math.Pow(errorValsTcplx[i].Imaginary, 2);
-                //FFTmagY = Math.Pow(errorValsYcplx[i].Real, 2) + Math.Pow(errorValsTcplx[i].Imaginary, 2);
 
                 FFTmagT = errorValsTcplx[i].Magnitude;
                 FFTmagX = errorValsXcplx[i].Magnitude;
@@ -657,6 +668,7 @@ namespace GuideLogAnalyzer
             catch { return; } //do nothing if it won't convert cleanly
                               //otherwise, update the image scale values
         }
+
     }
 }
 

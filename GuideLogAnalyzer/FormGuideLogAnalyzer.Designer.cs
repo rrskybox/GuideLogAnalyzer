@@ -200,7 +200,7 @@
             legend1.Name = "Legend1";
             legend1.Title = " Tracking Error";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(16, 98);
+            this.chart1.Location = new System.Drawing.Point(17, 97);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastPoint;
@@ -231,7 +231,7 @@
             legend2.Name = "Legend1";
             legend2.Title = "Periodicity\\n\\nMount Dominated Range";
             this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(16, 336);
+            this.chart2.Location = new System.Drawing.Point(17, 335);
             this.chart2.Name = "chart2";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -245,7 +245,7 @@
             // 
             // SampleRateBox
             // 
-            this.SampleRateBox.Location = new System.Drawing.Point(179, 697);
+            this.SampleRateBox.Location = new System.Drawing.Point(180, 696);
             this.SampleRateBox.Name = "SampleRateBox";
             this.SampleRateBox.Size = new System.Drawing.Size(136, 20);
             this.SampleRateBox.TabIndex = 5;
@@ -255,7 +255,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(13, 701);
+            this.label2.Location = new System.Drawing.Point(14, 700);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 6;
@@ -320,7 +320,7 @@
             legend3.Name = "Legend1";
             legend3.Title = "Periodicity\\n\\nSeeing Dominated Range";
             this.chart3.Legends.Add(legend3);
-            this.chart3.Location = new System.Drawing.Point(16, 514);
+            this.chart3.Location = new System.Drawing.Point(17, 513);
             this.chart3.Name = "chart3";
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastPoint;
@@ -353,7 +353,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(12, 726);
+            this.label7.Location = new System.Drawing.Point(13, 725);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(150, 13);
             this.label7.TabIndex = 17;
@@ -361,7 +361,7 @@
             // 
             // ImageScaleBox
             // 
-            this.ImageScaleBox.Location = new System.Drawing.Point(179, 723);
+            this.ImageScaleBox.Location = new System.Drawing.Point(180, 722);
             this.ImageScaleBox.Name = "ImageScaleBox";
             this.ImageScaleBox.Size = new System.Drawing.Size(136, 20);
             this.ImageScaleBox.TabIndex = 16;
@@ -395,7 +395,7 @@
             this.MountControlGroup.Controls.Add(this.label4);
             this.MountControlGroup.Controls.Add(this.label5);
             this.MountControlGroup.ForeColor = System.Drawing.Color.White;
-            this.MountControlGroup.Location = new System.Drawing.Point(12, 820);
+            this.MountControlGroup.Location = new System.Drawing.Point(13, 819);
             this.MountControlGroup.Name = "MountControlGroup";
             this.MountControlGroup.Size = new System.Drawing.Size(309, 103);
             this.MountControlGroup.TabIndex = 20;
@@ -415,7 +415,7 @@
             this.groupBox1.Controls.Add(this.AOSlewRateBox);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(331, 697);
+            this.groupBox1.Location = new System.Drawing.Point(332, 696);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(169, 226);
             this.groupBox1.TabIndex = 21;
@@ -518,7 +518,7 @@
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupBox2.Location = new System.Drawing.Point(506, 697);
+            this.groupBox2.Location = new System.Drawing.Point(507, 696);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(740, 226);
             this.groupBox2.TabIndex = 22;
@@ -1044,7 +1044,7 @@
             chartArea4.AxisY.MajorGrid.Enabled = false;
             chartArea4.Name = "CalibrationChart";
             this.chart4.ChartAreas.Add(chartArea4);
-            this.chart4.Location = new System.Drawing.Point(1121, 187);
+            this.chart4.Location = new System.Drawing.Point(1122, 186);
             this.chart4.Name = "chart4";
             this.chart4.Size = new System.Drawing.Size(95, 95);
             this.chart4.TabIndex = 50;
@@ -1055,7 +1055,7 @@
             this.CalibrationGraphLabel.AutoSize = true;
             this.CalibrationGraphLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CalibrationGraphLabel.ForeColor = System.Drawing.Color.Brown;
-            this.CalibrationGraphLabel.Location = new System.Drawing.Point(1140, 295);
+            this.CalibrationGraphLabel.Location = new System.Drawing.Point(1141, 294);
             this.CalibrationGraphLabel.Name = "CalibrationGraphLabel";
             this.CalibrationGraphLabel.Size = new System.Drawing.Size(56, 13);
             this.CalibrationGraphLabel.TabIndex = 51;
@@ -1067,7 +1067,7 @@
             this.label35.AutoSize = true;
             this.label35.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label35.ForeColor = System.Drawing.Color.Black;
-            this.label35.Location = new System.Drawing.Point(1101, 230);
+            this.label35.Location = new System.Drawing.Point(1102, 229);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(25, 13);
             this.label35.TabIndex = 52;
@@ -1079,7 +1079,7 @@
             this.label36.AutoSize = true;
             this.label36.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label36.ForeColor = System.Drawing.Color.Black;
-            this.label36.Location = new System.Drawing.Point(1202, 230);
+            this.label36.Location = new System.Drawing.Point(1203, 229);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(19, 13);
             this.label36.TabIndex = 53;
@@ -1104,7 +1104,7 @@
             // 
             this.label38.AutoSize = true;
             this.label38.ForeColor = System.Drawing.Color.White;
-            this.label38.Location = new System.Drawing.Point(14, 753);
+            this.label38.Location = new System.Drawing.Point(15, 752);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(68, 13);
             this.label38.TabIndex = 56;
@@ -1112,7 +1112,7 @@
             // 
             // PEIndexTextBox
             // 
-            this.PEIndexTextBox.Location = new System.Drawing.Point(179, 750);
+            this.PEIndexTextBox.Location = new System.Drawing.Point(180, 749);
             this.PEIndexTextBox.Name = "PEIndexTextBox";
             this.PEIndexTextBox.Size = new System.Drawing.Size(45, 20);
             this.PEIndexTextBox.TabIndex = 55;
@@ -1135,7 +1135,7 @@
             // 
             this.label39.AutoSize = true;
             this.label39.ForeColor = System.Drawing.Color.White;
-            this.label39.Location = new System.Drawing.Point(14, 782);
+            this.label39.Location = new System.Drawing.Point(15, 781);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(84, 13);
             this.label39.TabIndex = 58;
@@ -1143,7 +1143,7 @@
             // 
             // SaturatedTextBox
             // 
-            this.SaturatedTextBox.Location = new System.Drawing.Point(179, 779);
+            this.SaturatedTextBox.Location = new System.Drawing.Point(180, 778);
             this.SaturatedTextBox.Name = "SaturatedTextBox";
             this.SaturatedTextBox.Size = new System.Drawing.Size(132, 20);
             this.SaturatedTextBox.TabIndex = 59;

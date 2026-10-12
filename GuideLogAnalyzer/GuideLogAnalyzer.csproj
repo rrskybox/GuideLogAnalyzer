@@ -28,7 +28,7 @@
     <SuiteName>TSXToolkit</SuiteName>
     <WebPage>publish.html</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>67</ApplicationRevision>
+    <ApplicationRevision>68</ApplicationRevision>
     <ApplicationVersion>1.10.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
