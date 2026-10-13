@@ -92,7 +92,7 @@ namespace GuideLogAnalyzer
             CurrentBTPBox.Text = xH.Detail(xH.CurrentBTP) != "N/A" ? xH.Detail(xH.CurrentBTP) : "N/A";
             CurrentBTPBox.Text = CurrentBTPBox.Text == "0" ? "No" : "Yes";
             BeforePECBox.Text = xH.Detail(xH.BeforePEC) != "N/A" ? xH.Detail(xH.BeforePEC) : "N/A";
-            BeforePECBox.Text = BeforePECBox.Text== "1"? "No": "Yes";
+            BeforePECBox.Text = BeforePECBox.Text == "1" ? "No" : "Yes";
 
             AxisControlBox.Text = xH.Detail(xH.XPlusAxis) +
                                         " / " +
@@ -123,9 +123,14 @@ namespace GuideLogAnalyzer
             double xSlope = 0;
             double ySlope = 0;
             double tSlope = 0;
+            double xOffset = 0;
+            double yOffset = 0;
+            double tOffset = 0;
 
             double cxSlope = 0;
             double cySlope = 0;
+            double cxOffset = 0;
+            double cyOffset = 0;
 
             string scaleXString = xH.Detail("ImageScaleXatbinning" + binX.ToString("0"));
             string scaleYString = xH.Detail("ImageScaleYatbinning" + binY.ToString("0"));
@@ -189,23 +194,11 @@ namespace GuideLogAnalyzer
                 guideStarSignal[i] = guideLog.GetLogValue(i, LogReader.LogVal.GuideStarSignal);
             }
 
-            if (RemoveDriftCheckBox.Checked)
-            {
-                tSlope = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl,false);
-                xSlope = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl,false);
-                ySlope = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl,false);
-                cxSlope = Analysis.RemoveOffsetAndSlope(ref centroidValsXdbl, false);   
-                cySlope = Analysis.RemoveOffsetAndSlope(ref centroidValsYdbl, false);
-            }
-            else
-            {
-                tSlope = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl, true); //Slope only
-                xSlope = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl, true); //Slope only
-                ySlope = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl, true); //Slope only
-                cxSlope = Analysis.RemoveOffsetAndSlope(ref centroidValsXdbl, true); //Slope only
-                cySlope = Analysis.RemoveOffsetAndSlope(ref centroidValsYdbl, true); //Slope only
-
-            }
+            (tSlope, tOffset) = Analysis.RemoveOffsetAndSlope(ref errorValsTdbl, RemoveDriftCheckBox.Checked, RemoveOffsetCheckBox.Checked);
+            (xSlope, xOffset) = Analysis.RemoveOffsetAndSlope(ref errorValsXdbl, RemoveDriftCheckBox.Checked, RemoveOffsetCheckBox.Checked);
+            (ySlope, yOffset) = Analysis.RemoveOffsetAndSlope(ref errorValsYdbl, RemoveDriftCheckBox.Checked, RemoveOffsetCheckBox.Checked);
+            (cxSlope, cxOffset) = Analysis.RemoveOffsetAndSlope(ref centroidValsXdbl, RemoveDriftCheckBox.Checked, RemoveOffsetCheckBox.Checked);
+            (cySlope, cyOffset) = Analysis.RemoveOffsetAndSlope(ref centroidValsYdbl, RemoveDriftCheckBox.Checked, RemoveOffsetCheckBox.Checked);
 
             for (int i = 0; i < vLen; i++)
             {
@@ -652,6 +645,12 @@ namespace GuideLogAnalyzer
         }
 
         private void RemoveDriftCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CompileForm();
+            return;
+        }
+
+        private void RemoveOffsetCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             CompileForm();
             return;

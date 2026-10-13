@@ -138,6 +138,7 @@
             this.CurrentBTPBox = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
             this.BeforePECBox = new System.Windows.Forms.TextBox();
+            this.RemoveOffsetCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
@@ -154,7 +155,7 @@
             // 
             this.GuideLogFilePath.Location = new System.Drawing.Point(93, 12);
             this.GuideLogFilePath.Name = "GuideLogFilePath";
-            this.GuideLogFilePath.Size = new System.Drawing.Size(827, 20);
+            this.GuideLogFilePath.Size = new System.Drawing.Size(745, 20);
             this.GuideLogFilePath.TabIndex = 0;
             // 
             // label1
@@ -173,7 +174,7 @@
             this.GuideLogFilePathBrowse.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
             this.GuideLogFilePathBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GuideLogFilePathBrowse.ForeColor = System.Drawing.Color.Black;
-            this.GuideLogFilePathBrowse.Location = new System.Drawing.Point(931, 10);
+            this.GuideLogFilePathBrowse.Location = new System.Drawing.Point(848, 10);
             this.GuideLogFilePathBrowse.Name = "GuideLogFilePathBrowse";
             this.GuideLogFilePathBrowse.Size = new System.Drawing.Size(61, 23);
             this.GuideLogFilePathBrowse.TabIndex = 2;
@@ -789,7 +790,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.ForeColor = System.Drawing.Color.White;
-            this.label24.Location = new System.Drawing.Point(187, 45);
+            this.label24.Location = new System.Drawing.Point(171, 44);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(54, 13);
             this.label24.TabIndex = 24;
@@ -797,9 +798,9 @@
             // 
             // BuildBox
             // 
-            this.BuildBox.Location = new System.Drawing.Point(169, 68);
+            this.BuildBox.Location = new System.Drawing.Point(162, 68);
             this.BuildBox.Name = "BuildBox";
-            this.BuildBox.Size = new System.Drawing.Size(92, 20);
+            this.BuildBox.Size = new System.Drawing.Size(63, 20);
             this.BuildBox.TabIndex = 23;
             this.BuildBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -861,7 +862,7 @@
             // 
             this.label28.AutoSize = true;
             this.label28.ForeColor = System.Drawing.Color.White;
-            this.label28.Location = new System.Drawing.Point(306, 45);
+            this.label28.Location = new System.Drawing.Point(285, 44);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(37, 13);
             this.label28.TabIndex = 32;
@@ -869,9 +870,9 @@
             // 
             // MountBox
             // 
-            this.MountBox.Location = new System.Drawing.Point(267, 68);
+            this.MountBox.Location = new System.Drawing.Point(231, 68);
             this.MountBox.Name = "MountBox";
-            this.MountBox.Size = new System.Drawing.Size(111, 20);
+            this.MountBox.Size = new System.Drawing.Size(147, 20);
             this.MountBox.TabIndex = 31;
             this.MountBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1122,7 +1123,7 @@
             // 
             this.RemoveDriftCheckBox.AutoSize = true;
             this.RemoveDriftCheckBox.ForeColor = System.Drawing.Color.White;
-            this.RemoveDriftCheckBox.Location = new System.Drawing.Point(1012, 13);
+            this.RemoveDriftCheckBox.Location = new System.Drawing.Point(915, 14);
             this.RemoveDriftCheckBox.Name = "RemoveDriftCheckBox";
             this.RemoveDriftCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RemoveDriftCheckBox.Size = new System.Drawing.Size(88, 17);
@@ -1203,12 +1204,26 @@
             this.BeforePECBox.TabIndex = 65;
             this.BeforePECBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // RemoveOffsetCheckBox
+            // 
+            this.RemoveOffsetCheckBox.AutoSize = true;
+            this.RemoveOffsetCheckBox.ForeColor = System.Drawing.Color.White;
+            this.RemoveOffsetCheckBox.Location = new System.Drawing.Point(1009, 14);
+            this.RemoveOffsetCheckBox.Name = "RemoveOffsetCheckBox";
+            this.RemoveOffsetCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.RemoveOffsetCheckBox.Size = new System.Drawing.Size(97, 17);
+            this.RemoveOffsetCheckBox.TabIndex = 66;
+            this.RemoveOffsetCheckBox.Text = "Remove Offset";
+            this.RemoveOffsetCheckBox.UseVisualStyleBackColor = true;
+            this.RemoveOffsetCheckBox.CheckedChanged += new System.EventHandler(this.RemoveOffsetCheckBox_CheckedChanged);
+            // 
             // FormGuideLogAnalyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(1258, 934);
+            this.Controls.Add(this.RemoveOffsetCheckBox);
             this.Controls.Add(this.BeforePECBox);
             this.Controls.Add(this.label43);
             this.Controls.Add(this.CurrentBTPBox);
@@ -1388,6 +1403,7 @@
         private System.Windows.Forms.TextBox CurrentBTPBox;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.TextBox BeforePECBox;
+        private System.Windows.Forms.CheckBox RemoveOffsetCheckBox;
     }
 }
 
